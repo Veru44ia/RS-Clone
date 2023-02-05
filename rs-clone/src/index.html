@@ -1,17 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
   <title>RS Clone</title>
 </head>
-
 <body>
-  <header class="header"></header>
-  <main class="main"></main>
-  <footer class="footer"></footer>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h2><a href="#">Trello</a></h2>
+      </div>
+      <nav class="nav" >
+        <button class="nav-button">
+          <span class="workspace">Рабочее пространство</span>
+          <span class="arrow-down"><img src="./assets/down-arrow.svg" alt="arrow-down"> </span>
+        </button>
+        <button class="nav-button">
+          <span class="recent">Недавние</span>
+          <span class="arrow-down"><img src="./assets/down-arrow.svg" alt="arrow-down"> </span>
+        </button>
+        <button class="nav-button">
+          <span class="favorite">В избранном</span>
+          <span class="arrow-down"><img src="./assets/down-arrow.svg" alt="arrow-down"> </span>
+        </button>      
+      </nav>
+      <button class="create-bord-button">Создать доску</button>
+      <div class="user">
+        <span>Y</span>
+       </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="main-content"></div>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="rs-logo">
+        <a href="https://rs.school/js/" target="_blank" ><img src="./assets/rs_school.svg" alt="rss"></a>
+      </div>
+      <div class="github">
+        <p>GitHub</p>
+        <ul class="github-accounts" >
+          <li class="github-accounts-li first"><a href="https://github.com/Kotkiller/" target="_blank">Kotkiller</a></li>
+          <li class="github-accounts-li"><a href="https://github.com/Rannue/" target="_blank">Rannue</a></li>
+          <li class="github-accounts-li"><a href="https://github.com/Veru44ia/" target="_blank">Veru44ia</a></li>
+        </ul>        
+      </div>
+    </div>
+  </footer>
 </body>
-
 </html>
