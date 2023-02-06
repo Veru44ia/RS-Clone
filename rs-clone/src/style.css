@@ -20,7 +20,7 @@ body {
 }
 
 .header {
-  height: 10vh;
+  min-height: 10vh;
   display: flex;
   justify-content: center;
   background-color: var(--white);
@@ -91,13 +91,18 @@ h2>a {
   margin-left: 5%;
 }
 
+.main {
+  display: flex;
+  justify-content: center;
+}
+
 .main-content {
   width: 85%;
-  height: 75vh;
-} 
+  height: 80vh;
+}
 
 .footer {
-  height: 15vh;
+  height: 10vh;
   background-color: var(--black);
   display: flex;
   align-items: center;
