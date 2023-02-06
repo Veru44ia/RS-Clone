@@ -1,0 +1,25 @@
+.boards-container {
+  display: flex;
+}
+
+.button {
+  width: 227px;
+  height: 114px;
+  font-family: 'Noto Sans';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1d1d1d;
+  background: #e2e2e2;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:active {
+  background: #fdbdbd;
+}

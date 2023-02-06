@@ -2,6 +2,7 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
+import MainPage from '../main/main';
 import { URLData } from './urlData';
 
 class App {
@@ -18,11 +19,10 @@ class App {
     if (currentPAgeHTML) {
       currentPAgeHTML.remove();
     }
-    // const page: Page | null = null;
+    let page: Page | null = null;
     if (value === PageIDs.MAIN_PAGE) {
-      // page = new MainPage();
-      // this.createDefaultPage(page);
-      console.log('временная затычка');
+      page = new MainPage();
+      this.createDefaultPage(page);
     }
   }
 
@@ -53,10 +53,9 @@ class App {
     this.header.render();
     this.footer.render();
     const hash = URLData.getHash();
-    if (hash === PageIDs.MAIN_PAGE) {
-      // this.renderNewPage(PageIDs.MAIN_PAGE);
-      console.log('временная затычка');
-    }
+    if (hash === PageIDs.MAIN_PAGE || hash === '') {
+      this.renderNewPage(PageIDs.MAIN_PAGE);
+    } 
     this.enableRoutPage();
   }
 }
