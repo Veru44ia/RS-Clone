@@ -14,16 +14,19 @@ class Header extends Component {
       </div>
       <nav class="nav" >
         <button class="nav-button">
-          <span class="workspace">Рабочее пространство</span>
-          <span class="arrow-down"><img src="../../assets/down-arrow.svg" alt="arrow-down"></span>
+          <select class="select-button"> 
+            <option value="workspace" checked>Рабочее пространство</option>
+          </select>
         </button>
         <button class="nav-button">
-          <span class="recent">Недавние</span>
-          <span class="arrow-down"><img src="../../assets/down-arrow.svg" alt="arrow-down"></span>
+          <select class="select-button"> 
+            <option value="recent" checked>Недавние</option>
+          </select>
         </button>
         <button class="nav-button">
-          <span class="favorite">В избранном</span>
-          <span class="arrow-down"><img src="../../assets/down-arrow.svg" alt="arrow-down"></span>
+          <select class="select-button"> 
+            <option value="favorite" checked>В избранном</option>
+          </select>
         </button>      
       </nav>
       <button class="create-bord-button">Создать доску</button>

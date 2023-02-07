@@ -10,7 +10,7 @@ class Footer extends Component {
     this.content = `
     <div class="footer-content">
     <div class="rs-logo">
-      <a href="https://rs.school/js/" target="_blank"><img src="../../assets/rs_school.svg" alt="rss"></a>
+      <a class="rs-logo-link" href="https://rs.school/js/" target="_blank"></a>
     </div>
     <div class="github">
       <p>GitHub</p>
