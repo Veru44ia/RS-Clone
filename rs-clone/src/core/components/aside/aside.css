@@ -1,0 +1,41 @@
+.aside-item {
+  list-style: none;
+  margin: 0 0 20px 25px;
+}
+
+.aside-link {
+  font-family: 'Noto Sans';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  color: #1d1d1d;
+  transition: 0.5s;
+}
+
+.aside-link:hover {
+  opacity: 0.6;
+}
+
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
+
+.icon-board {
+  background-image: url("../../../assets/coolicon.svg");
+}
+
+.icon-template {
+  background-image: url("../../../assets/table.svg");
+}
+
+.icon-settings {
+  background-image: url("../../../assets/settings.svg");
+}

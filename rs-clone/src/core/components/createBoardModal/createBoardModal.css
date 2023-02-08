@@ -110,6 +110,7 @@
 .modal-list-bottom .list-item button {
   width: 40px;
   height: 32px;
+  position: relative;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -123,7 +124,9 @@
 }
 
 .dots {
-  height: 25px;
+  height: 22px;
+  font-weight: 600;
+  color: #5e6c84;
 }
 
 .tick {
@@ -156,7 +159,7 @@
 
 .input-title {
   display: inline-block;
-  margin-top: 20px;
+  margin: 20px 0 5px;
 }
 
 .star {
@@ -167,18 +170,20 @@
   display: block;
   width: 100%;
   background: transparent;
-  border: none;
   border: 1px solid #5e6c84;
   border-radius: 3px;
-  padding-bottom: 5px;
-  margin: 5px 0 15px;
-  font-size: 18px;
+  padding: 5px 0 5px 10px;
+  font-size: 17px;
 }
 
 .text-input::placeholder{
   color: #5e6c84;
   font-size: 14px;
-  padding-left: 7px;
+}
+
+.text-input:focus {
+  border-color: #0079bf;
+  outline: none;
 }
 
 .submit-button {
@@ -189,6 +194,7 @@
   letter-spacing: 0.05em;
   width: 100%;
   height: 34px;
+  margin-top: 15px;
   color:#fff;
   background: #0079bf;
   border: 0;
@@ -207,7 +213,7 @@
 
 .submit-button:disabled {
   background-color: #b3d5e8;
-  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .modal-text {
