@@ -14,11 +14,11 @@ module.exports = {
     open: true,
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "./dist"),
     clean: true,
     filename: "index.js",
     assetModuleFilename: "assets/[name][ext]",
-  },
+      },
   module: {
     rules: [
       {
