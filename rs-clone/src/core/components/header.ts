@@ -31,7 +31,7 @@ class Header extends Component {
       </nav>
       <button class="create-bord-button">Создать доску</button>
       <div class="user">
-        <span>Y</span>
+        <span>U</span>
        </div>
     </div>
     `;
