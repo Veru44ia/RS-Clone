@@ -31,8 +31,7 @@ class Header extends Component {
       </nav>
       <button class="create-bord-button">Создать доску</button>
       <div class="user"></div>
-    </div>
-    `;
+    </div>`;
     this.position = 'afterbegin';
   }
 
