@@ -7,14 +7,14 @@ const mode = process.env.NODE_ENV || "development";
 const devMode = mode === "development";
 
 module.exports = {
-  entry: path.resolve(__dirname, "./src/index"),
+  entry: path.resolve(__dirname, "src/index"),
   mode,
   devServer: {
     port: 8080,
     open: true,
   },
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "dist"),
     clean: true,
     filename: "index.js",
     assetModuleFilename: "assets/[name][ext]",
