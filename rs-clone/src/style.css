@@ -1,4 +1,5 @@
 @import url("../src/pages/boardContent/style.css");
+@import url("../src/pages/cardModal/modal.css");
 
 * {
   margin: 0;

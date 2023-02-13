@@ -1,12 +1,12 @@
 import { BorderBasicElement } from './borderBasicElement';
-import { BoardElementCreater } from './columnElementCreater';
+import { ElementCreater } from './ElementCreater';
 
 export enum ListCreatorParams {
   id = 'list',
   TARGET_CONTAINER = '.board-container__columns',
   ELEMS_CONTAINER = '.board-container__columns',
   PLUS_ELEM_PARENT = '.new-list__container',
-  PLUS_BUTTON = '.new-list__button',
+  PLUS_BUTTON = '.target-add-list',
   ADD_TITLE_CONTAINER = '.new-list__create-list',
   ADD_LIST_BUTTON = '.add-list',
   CLOSE_CREATE_LIST_BUTTON = '.close-create-list',
@@ -19,7 +19,7 @@ export enum CardCreatorParams {
   TARGET_CONTAINER = '.board-container__columns',
   ELEMS_CONTAINER = '.list-container__cards-container',
   PLUS_ELEM_PARENT = '.list-container__add-card-wrapper',
-  PLUS_BUTTON = '.list-container__add-card',
+  PLUS_BUTTON = '.target-add-card',
   ADD_TITLE_CONTAINER = '.new-list__create-list',
   ADD_LIST_BUTTON = '.add-list',
   CLOSE_CREATE_LIST_BUTTON = '.close-create-list',
@@ -29,9 +29,9 @@ export enum CardCreatorParams {
 
 export class BoardHandler {
 
-  renderColumnHandler = new BorderBasicElement();
+  borderBasicElement = new BorderBasicElement();
 
-  listCreater = new BoardElementCreater(
+  listCreater = new ElementCreater(
     ListCreatorParams.id,
     ListCreatorParams.TARGET_CONTAINER,
     ListCreatorParams.ELEMS_CONTAINER,
@@ -44,7 +44,7 @@ export class BoardHandler {
     ListCreatorParams.PLACEHOLDER,
   );
 
-  CardCreater = new BoardElementCreater(
+  CardCreater = new ElementCreater(
     CardCreatorParams.id,
     CardCreatorParams.TARGET_CONTAINER,
     CardCreatorParams.ELEMS_CONTAINER,
@@ -58,7 +58,7 @@ export class BoardHandler {
   );
 
   start() {
-    this.renderColumnHandler.start();
+    this.borderBasicElement.start();
     this.listCreater.start();
     this.CardCreater.start();
   }

@@ -1,6 +1,7 @@
+import { CardHandler } from './cardHandler';
 import { UIWhithParams } from './ui';
 
-export class BoardElementCreater {
+export class ElementCreater {
 
   id: string;
 
@@ -12,7 +13,7 @@ export class BoardElementCreater {
 
   plusElemParent: string;
 
-  plusElem: string;
+  targetPlusElem: string;
 
   addElemButton: string;
 
@@ -23,14 +24,14 @@ export class BoardElementCreater {
   placeholder: string;
 
   constructor(id: string, targetContainer: string, elemsContainer: string,
-    plusElemParent: string, plusElem: string, addTitleContainer: string,
+    plusElemParent: string, targetPlusElem: string, addTitleContainer: string,
     addElemButton: string, closeElemCreateButton: string, newElemContainer: string,
     placeholder: string) {
     this.id = id;
     this.targetContainer = targetContainer;
     this.elemsContainer = elemsContainer;
     this.plusElemParent = plusElemParent;
-    this.plusElem = plusElem;
+    this.targetPlusElem = targetPlusElem;
     this.addTitleContainer = addTitleContainer;
     this.addElemButton = addElemButton;
     this.closeElemCreateButton = closeElemCreateButton;
@@ -62,7 +63,7 @@ export class BoardElementCreater {
       targetContainer?.addEventListener('click', (event) => {
         const target = event.target as HTMLElement;
         const thisPlusContainer = this.getClosestElem(target, this.plusElemParent);
-        if (target.classList.contains(`${this.plusElem.slice(1)}`)) {
+        if (target.classList.contains(`${this.targetPlusElem.slice(1)}`)) {
           this.ifNewListButtonHasEventListener = true;
 
           thisPlusContainer?.insertAdjacentHTML('afterbegin', `${UIWhithParams.createList(this.placeholder)}`);
@@ -114,5 +115,8 @@ export class BoardElementCreater {
 
   start() {
     this.createNewElem();
+
+    const cardHandler = CardHandler.getInstance();
+    cardHandler.cardEventListener();
   }
 }

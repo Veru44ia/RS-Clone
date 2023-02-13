@@ -2,11 +2,11 @@ export enum UI {
 
   ADD_LIST = `
   <div class="new-list__container">
-  <div class="new-list__button">
-  <svg class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="new-list__button target-add-list">
+  <svg class="plus-icon target-add-list" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M13 13V19H11V13H5V11H11V5H13V11H19V13H13Z" fill="#F5F5F5" />
   </svg>
-  <h5>Добавить колонку</h5>
+  <h5 class="target-add-list">Добавить колонку</h5>
   </div>
   </div>
   `,
@@ -42,11 +42,11 @@ export class UIWhithParams {
       </div>
       <div class="list-container__cards-container">
         <div class="list-container__add-card-wrapper">
-        <div class="list-container__add-card">
-        <svg class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="list-container__add-card target-add-card">
+        <svg class="plus-icon target-add-card" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M13 13V19H11V13H5V11H11V5H13V11H19V13H13Z" />
         </svg>
-        <h5>Добавить карточку</h5>
+        <h5 class="target-add-card">Добавить карточку</h5>
       </div>
         </div>
       </div>
@@ -57,8 +57,8 @@ export class UIWhithParams {
   static addCard(title: string) {
     return `
     <div class="card-input-wrapper">
-    <div class='card'>
-    <p>${title}</p>
+    <div class='card card-target'>
+    <p class='card-target'>${title}</p>
     </div>
     </div>
   `;
@@ -79,6 +79,43 @@ export class UIWhithParams {
     </div>
     </div>
   `;
+  }
+
+  static cardModal() {
+    return `
+    <div class="modal-container">
+    <div class="modal-container__wrapper">
+      <div class="modal-container__header">
+        <div class="modal-container__change-title">
+          <div class="modal-container__title-icon icon">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.3335 14H2.66683C1.93045 14 1.3335 13.403 1.3335 12.6667V3.33333C1.3335 2.59695 1.93045 2 2.66683 2H13.3335C14.0699 2 14.6668 2.59695 14.6668 3.33333V12.6667C14.6668 13.403 14.0699 14 13.3335 14ZM2.66683 4.66667V12.6667H13.3335V4.66667H2.66683Z"
+                fill="#1D1D1D" />
+            </svg>
+          </div>
+          <input class="title" type="text" value="Hello my friend" class="modal-container__title-input">
+        </div>
+        <div class="modal-container__close-button">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M23.4532 6.6665L15.9998 14.1198L8.5465 6.6665L6.6665 8.5465L14.1198 15.9998L6.6665 23.4532L8.5465 25.3332L15.9998 17.8798L23.4532 25.3332L25.3332 23.4532L17.8798 15.9998L25.3332 8.5465L23.4532 6.6665Z"
+              fill="#1D1D1D" />
+          </svg>
+        </div>
+      </div>
+      <div class="modal-container__content-wrapper">
+        <div class="modal-container__left-side"></div>
+        <div class="modal-container__right-side">
+          <div class="modal-container__semantic-container">
+            <h6>Действия</h6>
+            <button class="modal-container__remove-card">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    `;
   }
 
 }
