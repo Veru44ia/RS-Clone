@@ -1,5 +1,5 @@
 import { Modal } from '../cardModal/modal';
-import { UIWhithParams } from './ui';
+import { BoardUI } from './ui';
 
 export class CardHandler {
   private static instance: CardHandler;
@@ -26,7 +26,7 @@ export class CardHandler {
         const target = event.target as HTMLElement;
         if (target.classList.contains(`${this.targetClass}`)) {
           this.renderModal();
-          const modal = new Modal;
+          const modal = new Modal(target);
           modal.start();
         }
       });
@@ -35,7 +35,7 @@ export class CardHandler {
   }
 
   renderModal() {
-    document.body.insertAdjacentHTML('afterbegin', `${UIWhithParams.cardModal()}`);
+    document.body.insertAdjacentHTML('afterbegin', `${BoardUI.cardModal()}`);
   }
 
 }

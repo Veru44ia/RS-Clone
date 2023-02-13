@@ -1,5 +1,5 @@
 import { CardHandler } from './cardHandler';
-import { UIWhithParams } from './ui';
+import { BoardUI } from './ui';
 
 export class ElementCreater {
 
@@ -66,7 +66,7 @@ export class ElementCreater {
         if (target.classList.contains(`${this.targetPlusElem.slice(1)}`)) {
           this.ifNewListButtonHasEventListener = true;
 
-          thisPlusContainer?.insertAdjacentHTML('afterbegin', `${UIWhithParams.createList(this.placeholder)}`);
+          thisPlusContainer?.insertAdjacentHTML('afterbegin', `${BoardUI.createList(this.placeholder)}`);
           let addTitleContainer: HTMLElement | null = null;
           if (thisPlusContainer) addTitleContainer = this.getElem(this.addTitleContainer, thisPlusContainer);
           if (addTitleContainer) {
@@ -101,9 +101,9 @@ export class ElementCreater {
           const newElem: HTMLElement = document.createElement('div');
           newElem.classList.add(`${this.newElemContainer.slice(1)}`);
           if (this.id === 'list') {
-            newElem.insertAdjacentHTML('afterbegin', `${UIWhithParams.addList(this.elemTitle)}`);
+            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(this.elemTitle)}`);
           } else {
-            newElem.insertAdjacentHTML('afterbegin', `${UIWhithParams.addCard(this.elemTitle)}`);
+            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(this.elemTitle)}`);
           }
           const elemsContainer = this.getClosestElem(plusElemContainer, `${this.elemsContainer}`);
           elemsContainer?.insertBefore(newElem, plusElemContainer);

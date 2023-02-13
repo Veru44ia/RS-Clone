@@ -26,7 +26,7 @@ export enum UI {
   `,
 }
 
-export class UIWhithParams {
+export class BoardUI {
 
   static addList(title: string) {
     return `
@@ -94,7 +94,7 @@ export class UIWhithParams {
                 fill="#1D1D1D" />
             </svg>
           </div>
-          <input class="title" type="text" value="Hello my friend" class="modal-container__title-input">
+          <input class="title" type="text" value="Lorem Ipsum" class="modal-container__title-input">
         </div>
         <div class="modal-container__close-button">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,6 +107,10 @@ export class UIWhithParams {
       <div class="modal-container__content-wrapper">
         <div class="modal-container__left-side"></div>
         <div class="modal-container__right-side">
+        <div class="modal-container__semantic-container">
+            <h6>Добавить в карточку</h6>
+            <button class="modal-container__labels">Метки</button>
+          </div>
           <div class="modal-container__semantic-container">
             <h6>Действия</h6>
             <button class="modal-container__remove-card">Удалить</button>
