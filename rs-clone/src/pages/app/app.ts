@@ -2,7 +2,9 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
+import { BoardHandler } from '../boardContent/boardContent';
 import { URLData } from './urlData';
+
 
 class App {
   private static container: HTMLElement | null = document.querySelector('.main');
@@ -23,6 +25,9 @@ class App {
       // page = new MainPage();
       // this.createDefaultPage(page);
       console.log('временная затычка');
+    } else if (value === PageIDs.BOARD_PAGE) {
+      const boardHandler = new BoardHandler();
+      boardHandler.start();
     }
   }
 
@@ -56,6 +61,8 @@ class App {
     if (hash === PageIDs.MAIN_PAGE) {
       // this.renderNewPage(PageIDs.MAIN_PAGE);
       console.log('временная затычка');
+    } else {
+      this.renderNewPage(PageIDs.BOARD_PAGE);
     }
     this.enableRoutPage();
   }

@@ -4,6 +4,7 @@ export const enum HeaderProperties {
 
 export enum PageIDs {
   MAIN_PAGE = 'Main',
+  BOARD_PAGE = 'Board',
 }
 
 export const enum FooterProperties {
