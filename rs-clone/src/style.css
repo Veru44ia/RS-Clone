@@ -138,7 +138,7 @@ h2 > a {
   justify-content: center;
 }
 
-.main-content {
+#current-page {
   width: 85%;
   height: 80vh;
 }
@@ -176,7 +176,7 @@ h2 > a {
   align-items: flex-start;
 }
 
-ul > li:hover {
+.github-accounts > li:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
@@ -194,7 +194,7 @@ ul > li:hover {
   height: 30px;
 }
 
-li > a {
+.github-accounts-li > a {
   text-decoration: none;
   color: var(--white);
   margin-left: 20px;
