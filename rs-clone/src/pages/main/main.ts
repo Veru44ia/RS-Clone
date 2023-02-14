@@ -1,7 +1,14 @@
 import Page from '../../core/templates/page';
 import Modal from '../../core/components/createBoardModal/createBoardModal';
 import Aside from '../../core/components/aside/aside';
+import LocalStorage from './localStorage';
 import './main.css';
+
+interface Board {
+  id: number,
+  name: string,
+  color: string,
+}
 
 class MainPage extends Page {
   modal: Modal;
@@ -14,21 +21,35 @@ class MainPage extends Page {
     this.aside = new Aside();
   }
 
-  renderBoardsList() {
+  renderBoardsList(boards: Board[]) {
     const mainWrapper = document.createElement('div');
     mainWrapper.classList.add('main-container');
-    const boardsBlock = document.createElement('div');
-    boardsBlock.classList.add('boards-container');
-    boardsBlock.innerHTML = `
-      <button type="button" class="button button-create-board">Создать доску</button>    
-    `;
-    mainWrapper.append(this.aside.render(), boardsBlock);
+    mainWrapper.append(this.aside.render());
+    const boardsContainer = document.createElement('div');
+    boardsContainer.classList.add('boards-container');
+    const boardsList = document.createElement('ul');
+    boardsList.classList.add('boards-list');
+    boards.forEach(({ id, name, color }) => {
+      const boardsItem = document.createElement('li');
+      boardsItem.classList.add('boards-item');
+      boardsItem.innerHTML = ` 
+        <button type="button" id="${id}" class="button">${name}</button>
+      `;
+      if (color.startsWith('url')) {
+        (boardsItem.firstElementChild as HTMLElement).style.backgroundImage = `${color}`;
+      } else {
+        (boardsItem.firstElementChild as HTMLElement).style.background = `${color}`;
+      }
+      boardsList.append(boardsItem);
+    });
+    boardsContainer.append(boardsList);
+    mainWrapper.append(boardsContainer);
     (this.container as HTMLElement).append(mainWrapper);
     return this.container;
   }
 
   render() {
-    this.renderBoardsList();
+    this.renderBoardsList(LocalStorage.getFromLocalStorage());
     this.modal.openModal();
     return this.container;
   }

@@ -10,10 +10,13 @@ class Modal {
 
   openModal() {
     window.onload = () => {
-      const boardsContainer = document.body.querySelector('.button-create-board') as HTMLElement;
-      boardsContainer.addEventListener('click', () => {
-        const mainContainer = document.body.querySelector('.boards-container') as HTMLDivElement;
-        mainContainer.append(this.render());
+      const boardsContainer = document.body.querySelector('.boards-list') as HTMLElement;
+      boardsContainer.addEventListener('click', (event: MouseEvent) => {
+        if ((event.target as HTMLElement).textContent === 'Создать доску') {
+          const mainContainer = document.body.querySelectorAll('.boards-item');
+          const buttonCreate = mainContainer[mainContainer.length - 1];
+          buttonCreate.append(this.render());
+        }
       });
     };
   }
@@ -32,16 +35,79 @@ class Modal {
 
   buttonsListeners() {
     document.addEventListener('click', (event: MouseEvent) => {
-      if ((event.target as HTMLElement).closest('.modal-list-top')) { 
+      if ((event.target as HTMLElement).closest('.modal-list-top .list-item .btn')) { 
         const item = event.target as HTMLButtonElement;
+        this.changeTicks();
         this.changePreviewImage(item.style.backgroundImage);
-      }  
+      } else if ((event.target as HTMLElement).closest('.modal-list-bottom .list-item .btn')) {
+        const item = event.target as HTMLButtonElement;
+        this.changePreviewColor(item.style.backgroundColor);
+        this.changeTicks();
+      }  else if ((event.target as HTMLElement).closest('.text-input')) {
+        this.changeInput();
+      }
+    });
+  }
+
+  changeTicks() {
+    const listItems = document.querySelectorAll('.list-item button');
+    const array = Array.from(listItems).slice(0, -1);
+    for (let i = 0; i < array.length; i++) { 
+      array[i].addEventListener('click', function (e: Event) {
+        const current = document.querySelectorAll('.tick');
+        current[0].className = current[0].className.replace(' tick', '');
+        (e.target as HTMLElement).className += ' tick'; 
+      });
+    }
+  }
+  
+  changeInput() {
+    const input = document.querySelector('.text-input') as HTMLInputElement;
+    const button = document.querySelector('.submit-button') as HTMLButtonElement;
+    input.addEventListener('input', () => {
+      if (input.value.length > 0) {
+        button.disabled = false;
+      } else {
+        button.disabled = true;
+      }
     });
   }
 
   changePreviewImage(image: string) {
     const preview = document.querySelector('.modal-board-preview') as HTMLElement;
     preview.style.backgroundImage = image;
+  }
+
+  changePreviewColor(color: string) {
+    const preview = document.querySelector('.modal-board-preview') as HTMLElement;
+    preview.style.backgroundImage = 'none';
+    preview.style.backgroundColor = color;
+  }
+
+  submitForm() {
+    const form = this.container.querySelector('.form') as HTMLFormElement;
+    form.addEventListener('submit', (event: Event) => {
+      event.preventDefault();
+      const modal = document.body.querySelector('.modal-container') as HTMLElement;
+      const name = document.querySelector('.name') as HTMLInputElement;
+      const color = document.querySelector('.tick') as HTMLInputElement;
+      const board = {
+        id: Date.now(),
+        name: `${name.value}`, 
+        color: `${color.style.backgroundImage || color.style.backgroundColor}`, 
+      };
+      if (localStorage.getItem('board')) {
+        const arr = JSON.parse(localStorage.getItem('board') as string);
+        const items = arr.slice(0, -1);
+        const lastItem = arr.slice(-1);
+        const newArr = [...items, board, ...lastItem];
+        localStorage.setItem('board', JSON.stringify(newArr));
+        location.reload();
+      } else {
+        localStorage.setItem('board', JSON.stringify(board));
+      }
+      modal.remove();
+    });
   }
 
   render() {
@@ -59,36 +125,36 @@ class Modal {
           <div class="modal-backgrounds">
             <ul class="modal-list-top">
               <li class="list-item">
-                <button type="button" class="tick" style="background-image: url(https://images.unsplash.com/photo-1675025844397-9819eb7091ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn tick" style="background-image: url(https://images.unsplash.com/photo-1675025844397-9819eb7091ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
               </li>
               <li class="list-item">
-                <button type="button" style="background-image: url(https://images.unsplash.com/photo-1675084364782-605b9986b6ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675084364782-605b9986b6ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
               </li>
               <li class="list-item">
-                <button type="button" style="background-image: url(https://images.unsplash.com/photo-1675016137839-78059b6ef795?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675016137839-78059b6ef795?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
               </li>
               <li class="list-item">
-                <button type="button" style="background-image: url(https://images.unsplash.com/photo-1675050757561-741bd739bc06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675050757561-741bd739bc06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
               </li>
             </ul>
             <ul class="modal-list-bottom">
               <li class="list-item">
-                <button type="button" title="Синий" style="background-color: #0079bf"></button>
+                <button type="button" class="btn" title="Синий" style="background-color: #0079bf"></button>
               </li>
               <li class="list-item">
-                <button type="button" title="Оранжевый" style="background-color: #ed992b"></button>
+                <button type="button" class="btn" title="Оранжевый" style="background-color: #ed992b"></button>
               </li>
               <li class="list-item">
-                <button type="button" title="Зеленый" style="background-color: #3c991d"></button>
+                <button type="button" class="btn" title="Зеленый" style="background-color: #3c991d"></button>
               </li>
               <li class="list-item">
-                <button type="button" title="Красный" style="background-color: #de4528"></button>
+                <button type="button" class="btn" title="Красный" style="background-color: #de4528"></button>
               </li>
               <li class="list-item">
-                <button type="button" title="Фиолетовый" style="background-color: #7d4699"></button>
+                <button type="button" class="btn" title="Фиолетовый" style="background-color: #7d4699"></button>
               </li>
               <li class="list-item">
-                <button type="button"><span class="dots">...</span></button>
+                <button type="button" class="btn last-button"><span class="dots">...</span></button>
               </li>
             </ul>
           </div>
@@ -105,6 +171,7 @@ class Modal {
     `;
     this.closeModal();
     this.buttonsListeners();
+    this.submitForm();
     return this.container;
   }
 }
