@@ -1,11 +1,15 @@
+import BackgroundModal from '../createBgModal.ts/createBgModal';
 import './createBoardModal.css';
 
 class Modal {
   container: HTMLElement;
 
+  backgroundModal: BackgroundModal;
+
   constructor(className: string) {
     this.container = document.createElement('div');
     this.container.className = className;
+    this.backgroundModal = new BackgroundModal('bg-modal');
   }
 
   openModal() {
@@ -45,6 +49,8 @@ class Modal {
         this.changeTicks();
       }  else if ((event.target as HTMLElement).closest('.text-input')) {
         this.changeInput();
+      } else if ((event.target as HTMLElement).closest('.last-button')) {
+        this.backgroundModal.openModal();
       }
     });
   }
@@ -154,7 +160,7 @@ class Modal {
                 <button type="button" class="btn" title="Фиолетовый" style="background-color: #7d4699"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn last-button"><span class="dots">...</span></button>
+                <button type="button" class="last-button"><span class="dots">...</span></button>
               </li>
             </ul>
           </div>
