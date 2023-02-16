@@ -109,16 +109,12 @@ class Modal {
         const lastItem = arr.slice(-1);
         const newArr = [...items, board, ...lastItem];
         localStorage.setItem('board', JSON.stringify(newArr));
-        location.reload();
+        const openBoard = new OpenBoard(board.name, board.color);
+        openBoard.start();
       } else {
         localStorage.setItem('board', JSON.stringify(board));
       }
       modal.remove();
-      console.log('hi');
-      // const hash = `#${PageIDs.BOARD_PAGE}`;
-      // history.pushState(null, '', hash);
-      const openBoard = new OpenBoard();
-      openBoard.start();
     });
   }
 
