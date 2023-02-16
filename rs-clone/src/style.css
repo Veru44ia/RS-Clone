@@ -137,18 +137,16 @@ h2>a {
 }
 
 .main {
+  display: flex;
+  justify-content: center;
+}
+
+#current-page {
+  width: 85%;
   height: 80vh;
 }
 
-/* .main-content {
-  width: 85%;
-  height: 80vh;
-} */
-
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   height: 10vh;
   background-color: var(--black);
   display: flex;
@@ -181,7 +179,7 @@ h2>a {
   align-items: flex-start;
 }
 
-ul>li:hover {
+.github-accounts>li:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
@@ -199,7 +197,7 @@ ul>li:hover {
   height: 30px;
 }
 
-li>a {
+.github-accounts-li>a {
   text-decoration: none;
   color: var(--white);
   margin-left: 20px;
