@@ -1,0 +1,42 @@
+.bg-modal-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bg-modal-wrapper.bottom {
+  margin-top: 10px;
+}
+
+.bg-modal-wrapper button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  background-color: #e2e2e2;
+  color: #5e6c84;
+  cursor: pointer; 
+}
+
+.modal-list-top.images {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 7px;
+}
+
+.modal-list-bottom.colors {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 7px;
+  margin-top: 0;
+}
+
+.modal-list-top.images .list-item {
+  height: 56px;
+}
+
+.modal-list-top.images .list-item button,
+.modal-list-bottom.colors .list-item button {
+  width: 85px;
+  height: 56px;
+}
