@@ -1,0 +1,30 @@
+:root {
+  --WHITE: #F5F5F5;
+  --BLACK: #1D1D1D;
+  --BLUE: #264653;
+  --GRAY: rgba(29, 29, 29, 0.5);
+  --SUPER_WIITE: #fff;
+}
+
+.board-total-container {
+  padding: 21px 40px 0 40px;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.board-total-container__header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--WHITE);
+  margin-bottom: 10px;
+}
+
+.board-options {
+  display: flex;
+  gap: 14px;
+
+  .option {
+    cursor: pointer;
+  }
+}

@@ -18,7 +18,7 @@ module.exports = {
     clean: true,
     filename: "index.js",
     assetModuleFilename: "assets/[name][ext]",
-      },
+  },
   module: {
     rules: [
       {

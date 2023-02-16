@@ -7,7 +7,7 @@ export class Modal {
     this.target = target;
   }
 
-  modal = document.querySelector('.modal-container');
+  modal = document.querySelector('.card-modal-container');
 
   closeButton: HTMLElement | null = document.querySelector('.modal-container__close-button');
 
@@ -16,6 +16,7 @@ export class Modal {
   leftSideContainer: HTMLElement | null = document.querySelector('.modal-container__left-side');
 
   closeModal() {
+    console.log('hi');
     if (this.closeButton) this.closeButton.addEventListener('click', () => {
       this.modal?.remove();
     });

@@ -83,7 +83,7 @@ export class BoardUI {
 
   static cardModal() {
     return `
-    <div class="modal-container">
+    <div class="card-modal-container">
     <div class="modal-container__wrapper">
       <div class="modal-container__header">
         <div class="modal-container__change-title">

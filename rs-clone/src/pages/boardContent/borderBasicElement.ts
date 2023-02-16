@@ -2,7 +2,7 @@ import { UI } from './ui';
 
 export class BorderBasicElement {
 
-  boardContentContainerParent: HTMLElement | null = document.querySelector('.main-content');
+  boardContentContainerParent: HTMLElement | null = document.querySelector('.board-total-container');
 
   columnsContainer: HTMLElement | null = null;
 

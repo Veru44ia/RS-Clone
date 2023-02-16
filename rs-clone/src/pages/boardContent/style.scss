@@ -3,34 +3,6 @@ body {
   box-sizing: border-box;
 }
 
-:root {
-  --WHITE: #F5F5F5;
-  --BLACK: #1D1D1D;
-  --BLUE: #264653;
-  --ORANGE: #E76F51;
-  --GRAY: rgba(29, 29, 29, 0.5);
-  --SUPER_WIITE: #fff;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background-color: var(--BLACK);
-  color: var(--WHITE);
-  border-radius: 50px;
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  padding: 8px 16px;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: var(--ORANGE);
-  }
-}
-
 .close-create-list {
   cursor: pointer;
 }
@@ -38,6 +10,15 @@ button {
 .board-container__columns {
   display: flex;
   gap: 10px;
+
+  :root {
+    --WHITE: #F5F5F5;
+    --BLACK: #1D1D1D;
+    --BLUE: #264653;
+    --GRAY: rgba(29, 29, 29, 0.5);
+    --SUPER_WIITE: #fff;
+  }
+
 
   h4,
   h5 {
@@ -53,6 +34,26 @@ button {
 
   h5 {
     font-weight: 400;
+  }
+
+
+  button {
+    cursor: pointer;
+    border: none;
+    background-color: var(--BLACK);
+    color: var(--WHITE);
+    border-radius: 50px;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 8px 16px;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #E76F51;
+    }
   }
 
 

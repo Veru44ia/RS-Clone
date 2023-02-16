@@ -2,17 +2,16 @@
   --WHITE: #F5F5F5;
   --BLACK: #1D1D1D;
   --BLUE: #264653;
-  --ORANGE: #E76F51;
   --GRAY: rgba(29, 29, 29, 0.5);
   --SUPER_WIITE: #fff;
 }
 
-.modal-container {
+.card-modal-container {
   position: absolute;
   z-index: 999;
   width: 100%;
   height: 100%;
-  background-color: var(--GRAY);
+  background-color: rgba(29, 29, 29, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +37,13 @@
     border-radius: 0;
     padding: 6px 12px;
     border-radius: 2px;
+    color: var(--WHITE);
+    border: none;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #264653;
+    }
   }
 
   .modal-container__wrapper {
@@ -65,7 +71,7 @@
 
       input:focus {
         outline: none;
-        caret-color: var(--ORANGE);
+        caret-color: #E76F51;
       }
     }
 
@@ -122,6 +128,8 @@
       transition: 0.3s;
       padding: 4px 8px;
       font-size: 14px;
+      color: var(--WHITE);
+      border: none;
 
       &:hover {
         opacity: 1;

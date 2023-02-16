@@ -2,7 +2,8 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
-import { BoardHandler } from '../boardContent/boardContent';
+import { OpenBoard } from '../board/openBoard';
+import MainPage from '../main/main';
 import { URLData } from './urlData';
 
 
@@ -20,14 +21,13 @@ class App {
     if (currentPAgeHTML) {
       currentPAgeHTML.remove();
     }
-    // const page: Page | null = null;
+    let page: Page | null = null;
     if (value === PageIDs.MAIN_PAGE) {
-      // page = new MainPage();
-      // this.createDefaultPage(page);
-      console.log('временная затычка');
+      page = new MainPage();
+      this.createDefaultPage(page);
     } else if (value === PageIDs.BOARD_PAGE) {
-      const boardHandler = new BoardHandler();
-      boardHandler.start();
+      const board = new OpenBoard();
+      board.start();
     }
   }
 
@@ -58,10 +58,9 @@ class App {
     this.header.render();
     this.footer.render();
     const hash = URLData.getHash();
-    if (hash === PageIDs.MAIN_PAGE) {
-      // this.renderNewPage(PageIDs.MAIN_PAGE);
-      console.log('временная затычка');
-    } else {
+    if (hash === PageIDs.MAIN_PAGE || hash === '') {
+      this.renderNewPage(PageIDs.MAIN_PAGE);
+    } else if (hash === PageIDs.BOARD_PAGE) {
       this.renderNewPage(PageIDs.BOARD_PAGE);
     }
     this.enableRoutPage();
