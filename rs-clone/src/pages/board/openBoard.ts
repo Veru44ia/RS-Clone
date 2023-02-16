@@ -13,8 +13,10 @@ export class OpenBoard {
 
   renderBoard() {
     const mainContainer = document.querySelector('.main');
-    if (mainContainer) mainContainer.insertAdjacentHTML('afterbegin', `
-    <div style="background-color: ${this.color}" class="board-total-container">
+    if (mainContainer) {
+      mainContainer.innerHTML = '';
+      mainContainer.insertAdjacentHTML('afterbegin', `
+    <div style="background: ${this.color}" class="board-total-container">
         <div class="board-total-container__header">
           <div class="title">
             <h2>${this.title}</h2>
@@ -35,6 +37,7 @@ export class OpenBoard {
         </div>
     </div>
     `);
+    }
   }
 
   start() {
