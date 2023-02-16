@@ -2,6 +2,7 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
+import { OpenBoard } from '../board/openBoard';
 import MainPage from '../main/main';
 import { URLData } from './urlData';
 
@@ -23,6 +24,9 @@ class App {
     if (value === PageIDs.MAIN_PAGE) {
       page = new MainPage();
       this.createDefaultPage(page);
+    } else if (value === PageIDs.BOARD_PAGE) {
+      const board = new OpenBoard();
+      board.start();
     }
   }
 
@@ -55,7 +59,9 @@ class App {
     const hash = URLData.getHash();
     if (hash === PageIDs.MAIN_PAGE || hash === '') {
       this.renderNewPage(PageIDs.MAIN_PAGE);
-    } 
+    } else if (hash === PageIDs.BOARD_PAGE) {
+      this.renderNewPage(PageIDs.BOARD_PAGE);
+    }
     this.enableRoutPage();
   }
 }

@@ -1,6 +1,6 @@
-import Page from '../../core/templates/page';
-import Modal from '../../core/components/createBoardModal/createBoardModal';
 import Aside from '../../core/components/aside/aside';
+import Modal from '../../core/components/createBoardModal/createBoardModal';
+import Page from '../../core/templates/page';
 import LocalStorage from './localStorage';
 import './main.css';
 

@@ -1,3 +1,5 @@
+@import url("../src/pages/board/board.css");
+
 * {
   margin: 0;
   padding: 0;
@@ -39,7 +41,7 @@ body {
   width: 150px;
 }
 
-h2 > a {
+h2>a {
   text-decoration: none;
   color: var(--black);
 }
@@ -89,6 +91,7 @@ h2 > a {
   border-color: #888;
   transition: 0.5s;
 }
+
 .select-button:focus {
   border-color: #aaa;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
@@ -133,12 +136,8 @@ h2 > a {
   margin-left: 5%;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-}
-
 #current-page {
+  margin: 0 auto;
   width: 85%;
   height: 80vh;
 }
@@ -166,7 +165,7 @@ h2 > a {
   gap: 10px;
 }
 
-.github > p {
+.github>p {
   font-weight: 600;
 }
 
@@ -176,7 +175,7 @@ h2 > a {
   align-items: flex-start;
 }
 
-.github-accounts > li:hover {
+.github-accounts>li:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
@@ -194,12 +193,12 @@ h2 > a {
   height: 30px;
 }
 
-.github-accounts-li > a {
+.github-accounts-li>a {
   text-decoration: none;
   color: var(--white);
   margin-left: 20px;
 }
 
-.first > a {
+.first>a {
   margin-left: 0;
 }

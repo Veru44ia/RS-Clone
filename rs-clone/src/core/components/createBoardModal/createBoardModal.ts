@@ -1,3 +1,4 @@
+import { OpenBoard } from '../../../pages/board/openBoard';
 import BackgroundModal from '../createBgModal.ts/createBgModal';
 import './createBoardModal.css';
 
@@ -39,7 +40,7 @@ class Modal {
 
   buttonsListeners() {
     document.addEventListener('click', (event: MouseEvent) => {
-      if ((event.target as HTMLElement).closest('.modal-list-top .list-item .btn')) { 
+      if ((event.target as HTMLElement).closest('.modal-list-top .list-item .btn')) {
         const item = event.target as HTMLButtonElement;
         this.changeTicks();
         this.changePreviewImage(item.style.backgroundImage);
@@ -47,7 +48,7 @@ class Modal {
         const item = event.target as HTMLButtonElement;
         this.changePreviewColor(item.style.backgroundColor);
         this.changeTicks();
-      }  else if ((event.target as HTMLElement).closest('.text-input')) {
+      } else if ((event.target as HTMLElement).closest('.text-input')) {
         this.changeInput();
       } else if ((event.target as HTMLElement).closest('.last-button')) {
         this.backgroundModal.openModal();
@@ -58,15 +59,15 @@ class Modal {
   changeTicks() {
     const listItems = document.querySelectorAll('.list-item button');
     const array = Array.from(listItems).slice(0, -1);
-    for (let i = 0; i < array.length; i++) { 
+    for (let i = 0; i < array.length; i++) {
       array[i].addEventListener('click', function (e: Event) {
         const current = document.querySelectorAll('.tick');
         current[0].className = current[0].className.replace(' tick', '');
-        (e.target as HTMLElement).className += ' tick'; 
+        (e.target as HTMLElement).className += ' tick';
       });
     }
   }
-  
+
   changeInput() {
     const input = document.querySelector('.text-input') as HTMLInputElement;
     const button = document.querySelector('.submit-button') as HTMLButtonElement;
@@ -99,8 +100,8 @@ class Modal {
       const color = document.querySelector('.tick') as HTMLInputElement;
       const board = {
         id: Date.now(),
-        name: `${name.value}`, 
-        color: `${color.style.backgroundImage || color.style.backgroundColor}`, 
+        name: `${name.value}`,
+        color: `${color.style.backgroundImage || color.style.backgroundColor}`,
       };
       if (localStorage.getItem('board')) {
         const arr = JSON.parse(localStorage.getItem('board') as string);
@@ -108,7 +109,8 @@ class Modal {
         const lastItem = arr.slice(-1);
         const newArr = [...items, board, ...lastItem];
         localStorage.setItem('board', JSON.stringify(newArr));
-        location.reload();
+        const openBoard = new OpenBoard(board.name, board.color);
+        openBoard.start();
       } else {
         localStorage.setItem('board', JSON.stringify(board));
       }
