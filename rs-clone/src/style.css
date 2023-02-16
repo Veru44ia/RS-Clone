@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -207,3 +208,4 @@ h2>a {
 @import url("../src/pages/boardContent/style.css");
 @import url("../src/pages/cardModal/modal.css");
 @import url("../src/pages/board/board.css");
+
