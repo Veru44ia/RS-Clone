@@ -133,11 +133,6 @@ h2 > a {
   margin-left: 5%;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-}
-
 #current-page {
   width: 85%;
   height: 80vh;
