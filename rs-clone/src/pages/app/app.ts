@@ -2,6 +2,7 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
+import { AuthorizationPage } from '../authorization/authorizationPage';
 import { OpenBoard } from '../board/openBoard';
 import MainPage from '../main/main';
 import { URLData } from './urlData';
@@ -28,6 +29,9 @@ class App {
     } else if (value === PageIDs.BOARD_PAGE) {
       const board = new OpenBoard();
       board.start();
+    } else if (value == PageIDs.AUTORIZATION_PAGE) {
+      const authorizationPage = new AuthorizationPage();
+      authorizationPage.render();
     }
   }
 
@@ -59,8 +63,9 @@ class App {
     this.footer.render();
     const hash = URLData.getHash();
     const userSatus = URLData.getUserStatus();
-    if (userSatus) {
-
+    if (!userSatus) {
+      console.log('hi');
+      this.renderNewPage(PageIDs.AUTORIZATION_PAGE);
     } else if (hash === PageIDs.MAIN_PAGE || hash === '') {
       this.renderNewPage(PageIDs.MAIN_PAGE);
     } else if (hash === PageIDs.BOARD_PAGE) {
