@@ -19,4 +19,13 @@ export class URLData {
     return hash;
   }
 
+  static getUserStatus() {
+    let UserStatus = false;
+    if (localStorage.getItem('userStatus') !== null) {
+      UserStatus = true;
+      return UserStatus;
+    }
+    return UserStatus;
+  }
+
 }

@@ -1,5 +1,5 @@
 import { OpenBoard } from '../../../pages/board/openBoard';
-import BackgroundModal from '../createBgModal.ts/createBgModal';
+import BackgroundModal from '../createBgModal/createBgModal';
 import './createBoardModal.css';
 
 class Modal {

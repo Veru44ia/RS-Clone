@@ -58,11 +58,15 @@ class App {
     this.header.render();
     this.footer.render();
     const hash = URLData.getHash();
-    if (hash === PageIDs.MAIN_PAGE || hash === '') {
+    const userSatus = URLData.getUserStatus();
+    if (userSatus) {
+
+    } else if (hash === PageIDs.MAIN_PAGE || hash === '') {
       this.renderNewPage(PageIDs.MAIN_PAGE);
     } else if (hash === PageIDs.BOARD_PAGE) {
       this.renderNewPage(PageIDs.BOARD_PAGE);
     }
+
     this.enableRoutPage();
   }
 }
