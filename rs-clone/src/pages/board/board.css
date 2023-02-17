@@ -17,6 +17,9 @@
       -ms-flex-direction: column;
           flex-direction: column;
   height: 80vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .board-total-container__header {

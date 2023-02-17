@@ -1,3 +1,5 @@
+import { BoardHandler } from '../boardContent/boardContent';
+
 export class OpenBoard {
   title: string;
 
@@ -16,7 +18,7 @@ export class OpenBoard {
     if (mainContainer) {
       mainContainer.innerHTML = '';
       mainContainer.insertAdjacentHTML('afterbegin', `
-    <div style="background: ${this.color}" class="board-total-container">
+    <div class="board-total-container">
         <div class="board-total-container__header">
           <div class="title">
             <h2>${this.title}</h2>
@@ -37,10 +39,19 @@ export class OpenBoard {
         </div>
     </div>
     `);
+
+      const boardTotalContainer = document.querySelector('.board-total-container');
+      if (this.color.startsWith('url')) {
+        (boardTotalContainer as HTMLElement).style.backgroundImage = `${this.color}`;
+      } else {
+        (boardTotalContainer as HTMLElement).style.background = `${this.color}`;
+      }
     }
   }
 
   start() {
     this.renderBoard();
+    const boardHandler = new BoardHandler();
+    boardHandler.start();
   }
 }
