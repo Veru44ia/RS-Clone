@@ -29,9 +29,9 @@ class App {
     } else if (value === PageIDs.BOARD_PAGE) {
       const board = new OpenBoard();
       board.start();
-    } else if (value == PageIDs.AUTORIZATION_PAGE) {
-      const authorizationPage = new AuthorizationPage();
-      authorizationPage.render();
+    } else if (value === PageIDs.AUTORIZATION_PAGE) {
+      page = new AuthorizationPage();
+      this.createDefaultPage(page);
     }
   }
 
@@ -64,7 +64,6 @@ class App {
     const hash = URLData.getHash();
     const userSatus = URLData.getUserStatus();
     if (!userSatus) {
-      console.log('hi');
       this.renderNewPage(PageIDs.AUTORIZATION_PAGE);
     } else if (hash === PageIDs.MAIN_PAGE || hash === '') {
       this.renderNewPage(PageIDs.MAIN_PAGE);
