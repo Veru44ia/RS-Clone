@@ -14,17 +14,22 @@ export class AuthorizationPage extends Page {
       <div id="error"></div>
       <form id="form" action="/" method="GET">
         <div class="input-container">
-          <label for="name">Email</label>
-          <input id="name" name="name" type="email" required>
+          <label for="email">Email</label>
+          <input id="email-input" name="email" type="email" required>
         </div>
         <div class="input-container">
           <label for="password">Password</label>
-          <input id="password" name="password" type="password">
+          <input id="password-input" name="password" type="password">
         </div>
+        <div id="response_message"></div>
         <div class="buttons-container">
-        <button type="submit">Sing Up</button>
-        <button class="sing-in" type="submit">Sing In</button>
+        <button id="sing-up" type="submit">Sing Up</button>
+        <button id="sing-in" class="sing-in" type="submit">Sing In</button>
         </div>
+        <h3>
+        <span>Currently logged as: </span>
+        <span id="current_user"></span>
+        </h3>
       </form>
       </div>
     </div>
