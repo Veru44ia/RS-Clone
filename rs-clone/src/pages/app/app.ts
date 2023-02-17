@@ -6,6 +6,7 @@ import { OpenBoard } from '../board/openBoard';
 import MainPage from '../main/main';
 import { URLData } from './urlData';
 
+
 class App {
   private static container: HTMLElement | null = document.querySelector('.main');
 

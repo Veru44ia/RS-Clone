@@ -1,5 +1,5 @@
 import { OpenBoard } from '../../../pages/board/openBoard';
-import BackgroundModal from '../createBgModal.ts/createBgModal';
+import BackgroundModal from '../createBgModal/createBgModal';
 import './createBoardModal.css';
 
 class Modal {
@@ -15,6 +15,12 @@ class Modal {
 
   openModal() {
     window.onload = () => {
+      const headerButton = document.body.querySelector('.create-bord-button') as HTMLElement;
+      headerButton.addEventListener('click', () => {
+        const mainContainer = document.body.querySelectorAll('.boards-item');
+        const buttonCreate = mainContainer[mainContainer.length - 1];
+        buttonCreate.append(this.render());
+      });
       const boardsContainer = document.body.querySelector('.boards-list') as HTMLElement;
       boardsContainer.addEventListener('click', (event: MouseEvent) => {
         if ((event.target as HTMLElement).textContent === 'Создать доску') {
