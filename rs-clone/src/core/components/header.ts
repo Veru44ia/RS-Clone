@@ -8,30 +8,34 @@ class Header extends Component {
   constructor(className: string) {
     super(className);
     this.content = `
-        <div class="header-content">
+    <div class="header-content">
+    <div class="header-content__left-side">
       <div class="logo">
-        <h2><a href="#">Trello-clone</a></h2>
+        <h2><a href="#">Clone</a></h2>
       </div>
-      <nav class="nav" >
+      <nav class="nav">
         <button class="nav-button">
-          <select class="select-button"> 
+          <select class="select-button">
             <option value="workspace" checked>Рабочее пространство</option>
           </select>
         </button>
         <button class="nav-button">
-          <select class="select-button"> 
+          <select class="select-button">
             <option value="recent" checked>Недавние</option>
           </select>
         </button>
         <button class="nav-button">
-          <select class="select-button"> 
+          <select class="select-button">
             <option value="favorite" checked>В избранном</option>
           </select>
-        </button>      
+        </button>
       </nav>
+    </div>
+    <div class="header-content__right-side">
       <button class="create-bord-button">Создать доску</button>
       <div class="user"></div>
-    </div>`;
+    </div>
+  </div>`;
     this.position = 'afterbegin';
   }
 

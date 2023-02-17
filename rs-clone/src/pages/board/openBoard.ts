@@ -1,3 +1,5 @@
+import { BoardHandler } from '../boardContent/boardContent';
+
 export class OpenBoard {
   title: string;
 
@@ -42,5 +44,7 @@ export class OpenBoard {
 
   start() {
     this.renderBoard();
+    const boardHandler = new BoardHandler();
+    boardHandler.start();
   }
 }
