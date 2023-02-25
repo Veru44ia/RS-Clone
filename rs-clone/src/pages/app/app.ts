@@ -2,6 +2,7 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
+import { AuthorizationHandler } from '../authorization/authorizationHandler';
 import { AuthorizationPage } from '../authorization/authorizationPage';
 import { OpenBoard } from '../board/openBoard';
 import MainPage from '../main/main';
@@ -32,6 +33,8 @@ class App {
     } else if (value === PageIDs.AUTORIZATION_PAGE) {
       page = new AuthorizationPage();
       this.createDefaultPage(page);
+      const authorizationHandler = new AuthorizationHandler();
+      authorizationHandler.start();
     }
   }
 

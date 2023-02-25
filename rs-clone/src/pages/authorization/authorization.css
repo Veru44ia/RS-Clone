@@ -40,7 +40,7 @@
   --SUPER_WIITE: #fff;
 }
 
-.authorization-container form {
+.authorization-container .authorization-container__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

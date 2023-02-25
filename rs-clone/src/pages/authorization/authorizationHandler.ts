@@ -89,4 +89,9 @@ export class AuthorizationHandler {
     });
   }
 
+  start() {
+    this.singIn();
+    this.signUp();
+  }
+
 }
