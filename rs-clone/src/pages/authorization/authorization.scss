@@ -1,12 +1,17 @@
-.header, .footer{
-  display: none;
-}
+// .header, .footer{
+//   display: none;
+// }
 
 .authorization-container {
   height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  #response_message {
+    align-self: center;
+    opacity: 0.5;
+  }
 
   .authorization-container__wrapper {
     display: flex;
@@ -70,11 +75,11 @@
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
     line-height: 19px;
     padding: 8px 16px;
     transition: 0.3s;
     width: 14.5vw;
+    font-size: 70%;
 
     &:hover {
       background-color: var(--BLACK)

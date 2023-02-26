@@ -1,9 +1,13 @@
+import { PageIDs } from '../../core/data/data';
+
 export class AuthorizationHandler {
+  backendUrl = 'https://fullstackproject-production.up.railway.app';
+
   responseMessage = document.getElementById('response_message');
 
-  signUpButton = document.getElementById('sing-up');
+  signUpButton = document.getElementById('sign-up');
 
-  signInButton = document.getElementById('sing-in');
+  signInButton = document.getElementById('sign-in');
 
   emailInput = document.getElementById('email-input') as HTMLInputElement;
 
@@ -11,8 +15,11 @@ export class AuthorizationHandler {
 
   currentUserField = document.querySelector('#current_user');
 
-  currentUser: HTMLElement | null = null;
+  header: HTMLElement | null = document.querySelector('.header');
 
+  footer: HTMLElement | null = document.querySelector('.footer');
+
+  currentUser: HTMLElement | null = null;
 
   signUp() {
     if (this.signUpButton) this.signUpButton.addEventListener('click', () => {
@@ -25,7 +32,7 @@ export class AuthorizationHandler {
         password = this.emailInput.value;
       }
     
-      fetch('http://127.0.0.1:3000/users/create', {
+      fetch(`${this.backendUrl}/users/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,6 +50,10 @@ export class AuthorizationHandler {
           if (data.user) {
             if (this.currentUserField) this.currentUserField.innerHTML = data.user.login;
             this.currentUser = data.user;
+            
+            localStorage.setItem('userID', data.user._id);
+            localStorage.setItem('userLogin', data.user.login);
+            this.GoToMainPage();
           }
         })
         .catch((error) => {
@@ -52,18 +63,17 @@ export class AuthorizationHandler {
   }
 
   singIn() {
-
     if (this.signInButton) this.signInButton.addEventListener('click', () => {
       let login = ''; 
       if (this.emailInput) {
         login = this.emailInput.value;
       }
       let password = ''; 
-      if (this.emailInput) {
-        password = this.emailInput.value;
+      if (this.passwordInput) {
+        password = this.passwordInput.value;
       }
     
-      fetch('http://127.0.0.1:3000/users/signin', {
+      fetch(`${this.backendUrl}/users/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,6 +90,10 @@ export class AuthorizationHandler {
           if (data.user) {
             if (this.currentUserField) this.currentUserField.innerHTML = data.user.login;
             this.currentUser = data.user;
+
+            localStorage.setItem('userID', data.user._id);
+            localStorage.setItem('userLogin', data.user.login);
+            this.GoToMainPage();
           }
           if (this.responseMessage) this.responseMessage.innerHTML = data.message;
         })
@@ -87,6 +101,18 @@ export class AuthorizationHandler {
           if (this.responseMessage) this.responseMessage.innerHTML = error.message;
         });
     });
+  }
+
+  GoToMainPage() {
+    window.location.hash = `#${PageIDs.MAIN_PAGE}`;
+
+    if (this.header) this.header.removeAttribute('style');
+    if (this.footer) this.footer.removeAttribute('style');
+
+    const user: HTMLElement | null = document.querySelector('.user');
+    const userName = localStorage.getItem('userLogin') as string;
+    if (user) user.innerText = userName[0].toUpperCase();
+    location.reload(); 
   }
 
   start() {
