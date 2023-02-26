@@ -2,7 +2,10 @@ import Footer from '../../core/components/footer';
 import Header from '../../core/components/header';
 import { FooterProperties, HeaderProperties, PageIDs } from '../../core/data/data';
 import Page from '../../core/templates/page';
+import { AuthorizationHandler } from '../authorization/authorizationHandler';
+import { AuthorizationPage } from '../authorization/authorizationPage';
 import { OpenBoard } from '../board/openBoard';
+import { HeaderHandler } from '../header/headerHandler';
 import MainPage from '../main/main';
 import { URLData } from './urlData';
 
@@ -28,6 +31,11 @@ class App {
     } else if (value === PageIDs.BOARD_PAGE) {
       const board = new OpenBoard();
       board.start();
+    } else if (value === PageIDs.AUTORIZATION_PAGE) {
+      page = new AuthorizationPage();
+      this.createDefaultPage(page);
+      const authorizationHandler = new AuthorizationHandler();
+      authorizationHandler.start();
     }
   }
 
@@ -57,12 +65,19 @@ class App {
   run() {
     this.header.render();
     this.footer.render();
+
     const hash = URLData.getHash();
-    if (hash === PageIDs.MAIN_PAGE || hash === '') {
+    const userID = URLData.getUserStatus();
+    if (!userID) {
+      this.renderNewPage(PageIDs.AUTORIZATION_PAGE);
+    } else if (hash === PageIDs.MAIN_PAGE || hash === '') {
       this.renderNewPage(PageIDs.MAIN_PAGE);
     } else if (hash === PageIDs.BOARD_PAGE) {
       this.renderNewPage(PageIDs.BOARD_PAGE);
     }
+
+    const headerHandler = new HeaderHandler();
+    headerHandler.start();
     this.enableRoutPage();
   }
 }

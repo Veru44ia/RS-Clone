@@ -47,14 +47,13 @@ router.post("/signin", async (request, response) => {
   }
 });
 
-function setHeaders(response) {
+async function setHeaders(request, response, next) {
   response.set({
-    "Access-Control-Allow-Origin": "http://127.0.0.1:5555",
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
   });
-  return response;
+  next();
 }
-
 module.exports = router;
