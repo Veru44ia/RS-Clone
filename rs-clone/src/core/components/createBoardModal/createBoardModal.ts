@@ -1,4 +1,5 @@
 import { OpenBoard } from '../../../pages/board/openBoard';
+import { API } from '../../api/api';
 import BackgroundModal from '../createBgModal/createBgModal';
 import './createBoardModal.css';
 
@@ -99,7 +100,7 @@ class Modal {
 
   submitForm() {
     const form = this.container.querySelector('.form') as HTMLFormElement;
-    form.addEventListener('submit', (event: Event) => {
+    form.addEventListener('submit', async (event: Event) => {
       event.preventDefault();
       const modal = document.body.querySelector('.modal-container') as HTMLElement;
       const name = document.querySelector('.name') as HTMLInputElement;
@@ -115,8 +116,21 @@ class Modal {
         const lastItem = arr.slice(-1);
         const newArr = [...items, board, ...lastItem];
         localStorage.setItem('board', JSON.stringify(newArr));
-        const openBoard = new OpenBoard(board.name, board.color);
-        openBoard.start();
+
+        const newBoard = await API.createBoard(board.name, board.color);
+        if (newBoard) {
+          console.log(newBoard);
+          const openBoard = new OpenBoard(newBoard._id, newBoard.title, newBoard.background);
+          openBoard.start();
+        } 
+
+        ////////////////////////////get all boards
+
+        const allBoards = await API.getUserBoards();
+        console.log(allBoards);
+
+        ////////////////////////////
+
       } else {
         localStorage.setItem('board', JSON.stringify(board));
       }
