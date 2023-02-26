@@ -16,17 +16,17 @@ class Modal {
   openModal() {
     window.onload = () => {
       const headerButton = document.body.querySelector('.create-bord-button') as HTMLElement;
-      headerButton.addEventListener('click', () => {
+      headerButton.addEventListener('click', async () => {
         const mainContainer = document.body.querySelectorAll('.boards-item');
         const buttonCreate = mainContainer[mainContainer.length - 1];
-        buttonCreate.append(this.render());
+        buttonCreate.append(await this.render());
       });
       const boardsContainer = document.body.querySelector('.boards-list') as HTMLElement;
-      boardsContainer.addEventListener('click', (event: MouseEvent) => {
+      boardsContainer.addEventListener('click', async (event: MouseEvent) => {
         if ((event.target as HTMLElement).textContent === 'Создать доску') {
           const mainContainer = document.body.querySelectorAll('.boards-item');
           const buttonCreate = mainContainer[mainContainer.length - 1];
-          buttonCreate.append(this.render());
+          buttonCreate.append(await this.render());
         }
       });
     };
@@ -48,30 +48,22 @@ class Modal {
     document.addEventListener('click', (event: MouseEvent) => {
       if ((event.target as HTMLElement).closest('.modal-list-top .list-item .btn')) {
         const item = event.target as HTMLButtonElement;
-        this.changeTicks();
+        const current = Array.from(document.querySelectorAll('.tick'));
+        current.map((cur) => cur.className = cur.className.replace(' tick', ''));
+        item.classList.add('tick');
         this.changePreviewImage(item.style.backgroundImage);
       } else if ((event.target as HTMLElement).closest('.modal-list-bottom .list-item .btn')) {
         const item = event.target as HTMLButtonElement;
         this.changePreviewColor(item.style.backgroundColor);
-        this.changeTicks();
+        const current = Array.from(document.querySelectorAll('.tick'));
+        current.map((cur) => cur.className = cur.className.replace(' tick', ''));
+        item.classList.add('tick');
       } else if ((event.target as HTMLElement).closest('.text-input')) {
         this.changeInput();
       } else if ((event.target as HTMLElement).closest('.last-button')) {
         this.backgroundModal.openModal();
       }
     });
-  }
-
-  changeTicks() {
-    const listItems = document.querySelectorAll('.list-item button');
-    const array = Array.from(listItems).slice(0, -1);
-    for (let i = 0; i < array.length; i++) {
-      array[i].addEventListener('click', function (e: Event) {
-        const current = document.querySelectorAll('.tick');
-        current[0].className = current[0].className.replace(' tick', '');
-        (e.target as HTMLElement).className += ' tick';
-      });
-    }
   }
 
   changeInput() {
@@ -84,6 +76,13 @@ class Modal {
         button.disabled = true;
       }
     });
+  }
+
+  async getLinkToImage() {
+    const url = 'https://api.unsplash.com/photos/random?query=nature&client_id=bgAy5fr13aewuw8euLW7ruqB3CB524TPyYwbGEoOql4';
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.urls.regular;
   }
 
   changePreviewImage(image: string) {
@@ -124,7 +123,7 @@ class Modal {
     });
   }
 
-  render() {
+  async render() {
     this.container.innerHTML = `
       <div class="modal-wrapper">
         <p class="modal-title">Создать доску</p>
@@ -142,13 +141,13 @@ class Modal {
                 <button type="button" class="btn tick" style="background-image: url(https://images.unsplash.com/photo-1675025844397-9819eb7091ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675084364782-605b9986b6ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(${await this.getLinkToImage()});"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675016137839-78059b6ef795?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(${await this.getLinkToImage()});"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675050757561-741bd739bc06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(${await this.getLinkToImage()});"></button>
               </li>
             </ul>
             <ul class="modal-list-bottom">
