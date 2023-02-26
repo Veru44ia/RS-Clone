@@ -5,9 +5,9 @@ export class OpenBoard {
 
   color: string;
 
-  boardID: number | undefined;
+  boardID: string;
 
-  constructor(title = 'No name', color = '#264653', boardID?: number) {
+  constructor(boardID = '1', title = 'No name', color = '#264653') {
     this.title = title;
     this.color = color;
     this.boardID = boardID;
@@ -18,7 +18,7 @@ export class OpenBoard {
     if (mainContainer) {
       mainContainer.innerHTML = '';
       mainContainer.insertAdjacentHTML('afterbegin', `
-    <div class="board-total-container">
+      <div class="board-total-container" data-boardI-id="${this.boardID}">
         <div class="board-total-container__header">
           <div class="title">
             <h2>${this.title}</h2>
@@ -37,8 +37,8 @@ export class OpenBoard {
             </svg>
           </div>
         </div>
-    </div>
-    `);
+      </div>
+      `);
 
       const boardTotalContainer = document.querySelector('.board-total-container');
       if (this.color.startsWith('url')) {
