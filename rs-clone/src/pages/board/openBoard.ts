@@ -1,4 +1,4 @@
-import { BoardHandler } from '../boardContent/boardContent';
+import { BoardHandler } from '../boardContent/boardHandler';
 
 export class OpenBoard {
   title: string;
@@ -18,6 +18,7 @@ export class OpenBoard {
     if (mainContainer) {
       mainContainer.innerHTML = '';
       mainContainer.insertAdjacentHTML('afterbegin', `
+      <div id="current-page">
       <div class="board-total-container" data-boardI-id="${this.boardID}">
         <div class="board-total-container__header">
           <div class="title">
@@ -38,6 +39,7 @@ export class OpenBoard {
           </div>
         </div>
       </div>
+    </div>
       `);
 
       const boardTotalContainer = document.querySelector('.board-total-container');
@@ -50,6 +52,9 @@ export class OpenBoard {
   }
 
   start() {
+    addEventListener('popstate', function () {
+      location.reload();
+    }, false);
     this.renderBoard();
     const boardHandler = new BoardHandler();
     boardHandler.start();
