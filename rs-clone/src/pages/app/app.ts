@@ -5,6 +5,7 @@ import Page from '../../core/templates/page';
 import { AuthorizationHandler } from '../authorization/authorizationHandler';
 import { AuthorizationPage } from '../authorization/authorizationPage';
 import { OpenBoard } from '../board/openBoard';
+import { HeaderHandler } from '../header/headerHandler';
 import MainPage from '../main/main';
 import { URLData } from './urlData';
 
@@ -61,19 +62,24 @@ class App {
     this.footer = new Footer(FooterProperties.className);
   }
 
-  run() {
-    this.header.render();
-    this.footer.render();
+  renderPage() {
     const hash = URLData.getHash();
-    const userSatus = URLData.getUserStatus();
-    if (!userSatus) {
+    const userID = URLData.getUserStatus();
+    if (!userID) {
       this.renderNewPage(PageIDs.AUTORIZATION_PAGE);
     } else if (hash === PageIDs.MAIN_PAGE || hash === '') {
       this.renderNewPage(PageIDs.MAIN_PAGE);
     } else if (hash === PageIDs.BOARD_PAGE) {
       this.renderNewPage(PageIDs.BOARD_PAGE);
     }
+  }
 
+  run() {
+    this.header.render();
+    this.footer.render();
+    this.renderPage();
+    const headerHandler = new HeaderHandler();
+    headerHandler.start();
     this.enableRoutPage();
   }
 }

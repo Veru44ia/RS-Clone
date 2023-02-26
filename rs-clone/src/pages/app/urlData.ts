@@ -21,7 +21,7 @@ export class URLData {
 
   static getUserStatus() {
     let UserStatus = false;
-    if (localStorage.getItem('userStatus') !== null) {
+    if (localStorage.getItem('userID') !== null) {
       UserStatus = true;
       return UserStatus;
     }
