@@ -28,8 +28,8 @@ export class AuthorizationHandler {
         login = this.emailInput.value;
       }
       let password = ''; 
-      if (this.emailInput) {
-        password = this.emailInput.value;
+      if (this.passwordInput) {
+        password = this.passwordInput.value;
       }
     
       fetch(`${this.backendUrl}/users/create`, {
