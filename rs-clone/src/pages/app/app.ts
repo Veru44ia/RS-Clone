@@ -62,7 +62,10 @@ class App {
     this.footer = new Footer(FooterProperties.className);
   }
 
-  renderPage() {
+  run() {
+    this.header.render();
+    this.footer.render();
+
     const hash = URLData.getHash();
     const userID = URLData.getUserStatus();
     if (!userID) {
@@ -72,12 +75,7 @@ class App {
     } else if (hash === PageIDs.BOARD_PAGE) {
       this.renderNewPage(PageIDs.BOARD_PAGE);
     }
-  }
 
-  run() {
-    this.header.render();
-    this.footer.render();
-    this.renderPage();
     const headerHandler = new HeaderHandler();
     headerHandler.start();
     this.enableRoutPage();
