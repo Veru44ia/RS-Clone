@@ -87,14 +87,6 @@ export class BoardUI {
     <div class="modal-container__wrapper">
       <div class="modal-container__header">
         <div class="modal-container__change-title">
-          <div class="modal-container__title-icon icon">
-            <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M13.3335 14H2.66683C1.93045 14 1.3335 13.403 1.3335 12.6667V3.33333C1.3335 2.59695 1.93045 2 2.66683 2H13.3335C14.0699 2 14.6668 2.59695 14.6668 3.33333V12.6667C14.6668 13.403 14.0699 14 13.3335 14ZM2.66683 4.66667V12.6667H13.3335V4.66667H2.66683Z"
-                fill="#1D1D1D" />
-            </svg>
-          </div>
-          <input class="title" type="text" value="Lorem Ipsum" class="modal-container__title-input">
         </div>
         <div class="modal-container__close-button">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
