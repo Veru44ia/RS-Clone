@@ -1,28 +1,28 @@
 const express = require("express");
 const router = express.Router();
 
-const List = require("../models/list");
+const Card = require("../models/card");
 
 router.get("/:id", setHeaders, async (request, response) => {
-  const board = request.params.id;
+  const list = request.params.id;
   try {
-    const lists = await List.find({ board: board });
-    response.json(lists);
+    const cards = await Card.find({ list: list });
+    response.json(cards);
   } catch (error) {
     response.status(500).json({ message: error.message });
   }
 });
 
 router.post("/create", setHeaders, async (request, response) => {
-  const list = new List({
-    board: request.body.board,
+  const card = new Card({
+    list: request.body.list,
     title: request.body.title,
     position: request.body.position,
   });
 
   try {
-    const newList = await list.save();
-    response.status(201).json(list);
+    const newCard = await card.save();
+    response.status(201).json(newCard);
   } catch (error) {
     response.status(400).json({ message: error.message });
   }
@@ -30,7 +30,7 @@ router.post("/create", setHeaders, async (request, response) => {
 
 router.delete("/:id", setHeaders, async (request, response) => {
   try {
-    await List.deleteOne({ _id: request.params.id });
+    await Card.deleteOne({ _id: request.params.id });
     response.json({ message: "deleted" });
   } catch (error) {
     response.status(400).json({ message: error.message });
