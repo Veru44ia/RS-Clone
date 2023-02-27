@@ -1,3 +1,4 @@
+import { BoardListsRender } from './boardListsRender';
 import { BorderBasicElement } from './borderBasicElement';
 import { ElementCreater } from './ElementCreater';
 
@@ -57,8 +58,11 @@ export class BoardHandler {
     CardCreatorParams.PLACEHOLDER,
   );
 
+  boardListsRender = new BoardListsRender();
+
   start() {
     this.borderBasicElement.start();
+    this.boardListsRender.start();
     this.listCreater.start();
     this.CardCreater.start();
   }

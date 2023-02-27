@@ -1,5 +1,3 @@
-// require("dotenv").config({ path: 'ENV_FILENAME' });
-
 require("dotenv").config();
 
 const express = require("express");
@@ -28,6 +26,9 @@ app.use(cors());
 
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
+
+const listsRouter = require("./routes/lists");
+app.use("/lists", listsRouter);
 
 app.listen(port, () =>
   console.log(`server started, listening at http://localhost:${port}`)

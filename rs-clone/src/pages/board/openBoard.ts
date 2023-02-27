@@ -19,7 +19,7 @@ export class OpenBoard {
       mainContainer.innerHTML = '';
       mainContainer.insertAdjacentHTML('afterbegin', `
       <div id="current-page">
-      <div class="board-total-container" data-boardI-id="${this.boardID}">
+      <div class="board-total-container" data-board-id="${this.boardID}">
         <div class="board-total-container__header">
           <div class="title">
             <h2>${this.title}</h2>

@@ -119,7 +119,6 @@ class Modal {
 
         const newBoard = await API.createBoard(board.name, board.color);
         if (newBoard) {
-          console.log(newBoard);
           const openBoard = new OpenBoard(newBoard._id, newBoard.title, newBoard.background);
           openBoard.start();
         } 
