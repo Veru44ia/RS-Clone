@@ -5,6 +5,12 @@ export interface IBoard {
   background: string;
 }
 
+export interface IList {
+  _id: string;
+  title: string;
+  position: string;
+}
+
 export class API {
 
   static backendUrl = 'https://fullstackproject-production.up.railway.app';
@@ -31,17 +37,15 @@ export class API {
     return createdBoard;
   }
 
-  static async getUserBoards() {
-    let result;
-    await fetch(`${this.backendUrl}/boards/${localStorage.getItem('userID')}`, {
+  static async getUserBoards(): Promise<IBoard[] | void> {
+    const result: IBoard[] | void = await fetch(`${this.backendUrl}/boards/${localStorage.getItem('userID')}`, {
       method: 'GET',
     })
       .then((response) => response.json())
       .then((data) => {
-        result = data;
+        return data;
       })
       .catch((error) => console.log(error.message));
-    console.log(result);
     return result;
   }
 
@@ -55,6 +59,40 @@ export class API {
   //     .catch((error) => console.log(error.message));
   //   updateBoardsUI();
   // }
+
+  static async createList(boardID: string, title: string, position: string) : Promise<IList | void> {
+    const createdBoard : IList | void = await fetch(`${API.backendUrl}/lists/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Origin: 'http://127.0.0.1:5555',
+      },
+      body: JSON.stringify({
+        title: `${title}`,
+        board: `${boardID}`,
+        position: `${position}`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => console.log(error.message));
+    return createdBoard;
+  }
+
+  static async getBoardLists(boardID:string): Promise<IList[] | void> {
+    const result: IList[] | void = await fetch(`${this.backendUrl}/lists/${boardID}`, {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => console.log(error.message));
+    return result;
+  }
 
 }
 
