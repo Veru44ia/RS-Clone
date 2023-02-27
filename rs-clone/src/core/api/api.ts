@@ -57,16 +57,17 @@ export class API {
     return result;
   }
 
-  // static async deleteBoard(id) {
-  //   console.log(`id is: ${id}`);
-  //   await fetch(`${backendUrl}/boards/${id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {})
-  //     .catch((error) => console.log(error.message));
-  //   updateBoardsUI();
-  // }
+  static async deleteBoard(id: string) {
+    console.log(`id is: ${id}`);
+    await fetch(`${this.backendUrl}/boards/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error.message));
+  }
 
   static async createList(boardID: string, title: string, position: string) : Promise<IList | void> {
     const createdList : IList | void = await fetch(`${API.backendUrl}/lists/create`, {
@@ -102,6 +103,18 @@ export class API {
     return result;
   }
 
+  static async deleteList(id: string) {
+    console.log(`id is: ${id}`);
+    await fetch(`${this.backendUrl}/lists/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error.message));
+  }
+
   static async createCard(listID: string, title: string, position: string) : Promise<ICrad | void> {
     const createdCard: ICrad | void = await fetch(`${API.backendUrl}/cards/create`, {
       method: 'POST',
@@ -123,6 +136,30 @@ export class API {
       })
       .catch((error) => console.log(error.message));
     return createdCard;
+  }
+
+  static async getListCards(listID:string): Promise<ICrad[] | void> {
+    const result: ICrad[] | void = await fetch(`${this.backendUrl}/lists/${listID}`, {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => console.log(error.message));
+    return result;
+  }
+
+  static async deleteCard(id: string) {
+    console.log(`id is: ${id}`);
+    await fetch(`${this.backendUrl}/cards/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error.message));
   }
 
 }

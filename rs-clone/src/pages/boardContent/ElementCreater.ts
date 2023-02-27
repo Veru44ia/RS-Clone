@@ -116,19 +116,11 @@ export class ElementCreater {
           } else {
             newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(this.elemTitle)}`);
             if (targetContainer && this.board) {
-              // const targetPlusElem: HTMLElement | null = this.getElem(this.targetPlusElem);
               if (this.addButton) {
                 const listIContainer = this.addButton.closest('.list-container__wrapper');
                 const listID = listIContainer?.getAttribute('data-id');
                 if (listID)API.createCard(listID, this.elemTitle, '0');
-                console.log(listID);
               }
-
-              // API.createList(, this.elemTitle,boardID);
-              // const countOfCards = targetContainer.childElementCount;
-              // const boardID = this.board.getAttribute('data-board-id');
-              // if (boardID)
-              // console.log('create-list', this.elemTitle, countOfLists, boardID);
             } 
           }
           const elemsContainer = this.getClosestElem(plusElemContainer, `${this.elemsContainer}`);
