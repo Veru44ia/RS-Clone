@@ -14,12 +14,6 @@ class Aside {
         <li class="aside-item">
           <a class="aside-link" href="#"><span class="icon icon-board"></span>Доски</a>
         </li>
-        <li class="aside-item">
-          <a class="aside-link" href="#"><span class="icon icon-template"></span>Шаблоны</a>
-        </li>
-        <li class="aside-item">
-          <a class="aside-link" href="#"><span class="icon icon-settings"></span>Настройки</a>
-        </li>
       </ul> 
     `;
     this.position = 'afterbegin';

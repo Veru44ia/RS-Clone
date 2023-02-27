@@ -1,36 +1,30 @@
 import { OpenBoard } from '../../../pages/board/openBoard';
 import { API } from '../../api/api';
-import BackgroundModal from '../createBgModal/createBgModal';
 import './createBoardModal.css';
 
 class Modal {
   container: HTMLElement;
 
-  backgroundModal: BackgroundModal;
-
   constructor(className: string) {
     this.container = document.createElement('div');
     this.container.className = className;
-    this.backgroundModal = new BackgroundModal('bg-modal');
   }
 
   openModal() {
-    window.onload = () => {
-      const headerButton = document.body.querySelector('.create-bord-button') as HTMLElement;
-      headerButton.addEventListener('click', () => {
+    const headerButton = document.body.querySelector('.create-bord-button') as HTMLElement;
+    headerButton.addEventListener('click', async () => {
+      const mainContainer = document.body.querySelectorAll('.boards-item');
+      const buttonCreate = mainContainer[mainContainer.length - 1];
+      buttonCreate.append(await this.render());
+    });
+    const boardsContainer = window.document.querySelector('.boards-list') as HTMLElement;
+    boardsContainer?.addEventListener('click', async (event: MouseEvent) => {
+      if ((event.target as HTMLElement).textContent === 'Создать доску') {
         const mainContainer = document.body.querySelectorAll('.boards-item');
         const buttonCreate = mainContainer[mainContainer.length - 1];
-        buttonCreate.append(this.render());
-      });
-      const boardsContainer = document.body.querySelector('.boards-list') as HTMLElement;
-      boardsContainer.addEventListener('click', (event: MouseEvent) => {
-        if ((event.target as HTMLElement).textContent === 'Создать доску') {
-          const mainContainer = document.body.querySelectorAll('.boards-item');
-          const buttonCreate = mainContainer[mainContainer.length - 1];
-          buttonCreate.append(this.render());
-        }
-      });
-    };
+        buttonCreate.append(await this.render());
+      }
+    });
   }
 
   closeModal() {
@@ -49,30 +43,20 @@ class Modal {
     document.addEventListener('click', (event: MouseEvent) => {
       if ((event.target as HTMLElement).closest('.modal-list-top .list-item .btn')) {
         const item = event.target as HTMLButtonElement;
-        this.changeTicks();
+        const current = Array.from(document.querySelectorAll('.tick'));
+        current.map((cur) => cur.className = cur.className.replace(' tick', ''));
+        item.classList.add('tick');
         this.changePreviewImage(item.style.backgroundImage);
       } else if ((event.target as HTMLElement).closest('.modal-list-bottom .list-item .btn')) {
         const item = event.target as HTMLButtonElement;
         this.changePreviewColor(item.style.backgroundColor);
-        this.changeTicks();
+        const current = Array.from(document.querySelectorAll('.tick'));
+        current.map((cur) => cur.className = cur.className.replace(' tick', ''));
+        item.classList.add('tick');
       } else if ((event.target as HTMLElement).closest('.text-input')) {
         this.changeInput();
-      } else if ((event.target as HTMLElement).closest('.last-button')) {
-        this.backgroundModal.openModal();
       }
     });
-  }
-
-  changeTicks() {
-    const listItems = document.querySelectorAll('.list-item button');
-    const array = Array.from(listItems).slice(0, -1);
-    for (let i = 0; i < array.length; i++) {
-      array[i].addEventListener('click', function (e: Event) {
-        const current = document.querySelectorAll('.tick');
-        current[0].className = current[0].className.replace(' tick', '');
-        (e.target as HTMLElement).className += ' tick';
-      });
-    }
   }
 
   changeInput() {
@@ -85,6 +69,13 @@ class Modal {
         button.disabled = true;
       }
     });
+  }
+
+  async getLinkToImage() {
+    const url = 'https://api.unsplash.com/photos/random?query=nature&client_id=agZpW_a7zy5X1aalj2Tr1ubXX9ZhaFpjSyRYTzvMnIg';
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.urls.regular;
   }
 
   changePreviewImage(image: string) {
@@ -105,39 +96,16 @@ class Modal {
       const modal = document.body.querySelector('.modal-container') as HTMLElement;
       const name = document.querySelector('.name') as HTMLInputElement;
       const color = document.querySelector('.tick') as HTMLInputElement;
-      const board = {
-        id: Date.now(),
-        name: `${name.value}`,
-        color: `${color.style.backgroundImage || color.style.backgroundColor}`,
-      };
-      if (localStorage.getItem('board')) {
-        const arr = JSON.parse(localStorage.getItem('board') as string);
-        const items = arr.slice(0, -1);
-        const lastItem = arr.slice(-1);
-        const newArr = [...items, board, ...lastItem];
-        localStorage.setItem('board', JSON.stringify(newArr));
-
-        const newBoard = await API.createBoard(board.name, board.color);
-        if (newBoard) {
-          const openBoard = new OpenBoard(newBoard._id, newBoard.title, newBoard.background);
-          openBoard.start();
-        } 
-
-        ////////////////////////////get all boards
-
-        const allBoards = await API.getUserBoards();
-        console.log(allBoards);
-
-        ////////////////////////////
-
-      } else {
-        localStorage.setItem('board', JSON.stringify(board));
-      }
+      const board = await API.createBoard(name.value, color.style.backgroundImage || color.style.backgroundColor);
+      if (board) {
+        const openBoard = new OpenBoard(board._id, board.title, board.background);
+        openBoard.start();
+      } 
       modal.remove();
     });
   }
 
-  render() {
+  async render() {
     this.container.innerHTML = `
       <div class="modal-wrapper">
         <p class="modal-title">Создать доску</p>
@@ -155,13 +123,13 @@ class Modal {
                 <button type="button" class="btn tick" style="background-image: url(https://images.unsplash.com/photo-1675025844397-9819eb7091ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675084364782-605b9986b6ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(${await this.getLinkToImage()});"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675016137839-78059b6ef795?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(${await this.getLinkToImage()});"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="btn" style="background-image: url(https://images.unsplash.com/photo-1675050757561-741bd739bc06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjc1NjAyNjU3&ixlib=rb-4.0.3&q=80&w=400);"></button>
+                <button type="button" class="btn" style="background-image: url(${await this.getLinkToImage()});"></button>
               </li>
             </ul>
             <ul class="modal-list-bottom">
@@ -181,7 +149,7 @@ class Modal {
                 <button type="button" class="btn" title="Фиолетовый" style="background-color: #7d4699"></button>
               </li>
               <li class="list-item">
-                <button type="button" class="last-button"><span class="dots">...</span></button>
+                <button type="button" class="btn" title="Розовый" style="background-color: #cd5a91"></button>
               </li>
             </ul>
           </div>
