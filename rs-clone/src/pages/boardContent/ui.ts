@@ -28,9 +28,9 @@ export enum UI {
 
 export class BoardUI {
 
-  static addList(title: string) {
+  static addList(title: string, id: string, position = '0') {
     return `
-    <div class="list-container__wrapper">
+    <div class="list-container__wrapper" data-position="${position}" data-id="${id}">
       <div class="list-container__header">
         <h4 class="list-container__title">${title}</h4>
         <svg class="list-container__settings" width="24" height="24" viewBox="0 0 24 24" fill="none"

@@ -1,3 +1,4 @@
+import { BoardSaveElemsRender } from './boardSaveElemsRender';
 import { BorderBasicElement } from './borderBasicElement';
 import { ElementCreater } from './ElementCreater';
 
@@ -59,6 +60,8 @@ export class BoardHandler {
 
   start() {
     this.borderBasicElement.start();
+    const boardSaveElemsRender = new BoardSaveElemsRender();
+    boardSaveElemsRender.start();
     this.listCreater.start();
     this.CardCreater.start();
   }

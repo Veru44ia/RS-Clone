@@ -1,13 +1,13 @@
-import { BoardHandler } from '../boardContent/boardContent';
+import { BoardHandler } from '../boardContent/boardHandler';
 
 export class OpenBoard {
   title: string;
 
   color: string;
 
-  boardID: number | undefined;
+  boardID: string;
 
-  constructor(title = 'No name', color = '#264653', boardID?: number) {
+  constructor(boardID = '1', title = 'No name', color = '#264653') {
     this.title = title;
     this.color = color;
     this.boardID = boardID;
@@ -18,7 +18,8 @@ export class OpenBoard {
     if (mainContainer) {
       mainContainer.innerHTML = '';
       mainContainer.insertAdjacentHTML('afterbegin', `
-    <div class="board-total-container">
+      <div id="current-page">
+      <div class="board-total-container" data-board-id="${this.boardID}">
         <div class="board-total-container__header">
           <div class="title">
             <h2>${this.title}</h2>
@@ -37,19 +38,23 @@ export class OpenBoard {
             </svg>
           </div>
         </div>
+      </div>
     </div>
-    `);
+      `);
 
-      const boardTotalContainer = document.querySelector('.board-total-container');
+      const boardTotalContainer = document.querySelector('.board-total-container') as HTMLElement;
       if (this.color.startsWith('url')) {
-        (boardTotalContainer as HTMLElement).style.backgroundImage = `${this.color}`;
+        boardTotalContainer.style.backgroundImage = `${this.color.slice(0, -1)}`;
       } else {
-        (boardTotalContainer as HTMLElement).style.background = `${this.color}`;
+        boardTotalContainer.style.background = `${this.color.slice(0, -1)}`;
       }
     }
   }
 
   start() {
+    addEventListener('popstate', function () {
+      location.reload();
+    }, false);
     this.renderBoard();
     const boardHandler = new BoardHandler();
     boardHandler.start();

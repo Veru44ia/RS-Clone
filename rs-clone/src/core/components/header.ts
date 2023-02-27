@@ -31,9 +31,15 @@ class Header extends Component {
         </button>
       </nav>
     </div>
+    <div class="header-content__center-side">
+      
+    </div>
     <div class="header-content__right-side">
-      <button class="create-bord-button">Создать доску</button>
-      <div class="user"></div>
+    <button class="create-bord-button">Создать доску</button>
+    <div class="user-content">
+    <div class="user"></div>
+    <button class="user-sign-out">Выйти</button>
+    </div>
     </div>
   </div>`;
     this.position = 'afterbegin';

@@ -1,3 +1,4 @@
+import { API } from '../../core/api/api';
 import { CardHandler } from './cardHandler';
 import { BoardUI } from './ui';
 
@@ -21,7 +22,9 @@ export class ElementCreater {
 
   newElemContainer: string;
 
-  placeholder: string;
+  placeholder: string; 
+
+  board = document.querySelector('.board-total-container');
 
   constructor(id: string, targetContainer: string, elemsContainer: string,
     plusElemParent: string, targetPlusElem: string, addTitleContainer: string,
@@ -93,17 +96,35 @@ export class ElementCreater {
   }
 
   addNewElem(container: HTMLElement, plusElemContainer: HTMLElement) {
+    const targetContainer: HTMLElement | null = this.getElem(this.targetContainer);
     if (this.addButton) {
       const input: HTMLInputElement | null = container.querySelector('.input');
-      this.addButton.addEventListener('click', () => {
+      this.addButton.addEventListener('click', async () => {
         if (input && input.value) {
           this.elemTitle = input.value;
           const newElem: HTMLElement = document.createElement('div');
           newElem.classList.add(`${this.newElemContainer.slice(1)}`);
           if (this.id === 'list') {
-            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(this.elemTitle)}`);
+            if (targetContainer && this.board) {
+              const countOfLists = (targetContainer.childElementCount).toString();
+              const boardID = this.board.getAttribute('data-board-id');
+              if (boardID) {
+                const list = await API.createList(boardID, this.elemTitle, countOfLists.toString());
+                if (list) {
+                  newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(list.title, list._id, list.position)}`);
+                  console.log(list._id);
+                } 
+              }
+            } 
           } else {
             newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(this.elemTitle)}`);
+            if (targetContainer && this.board) {
+              if (this.addButton) {
+                const listIContainer = this.addButton.closest('.list-container__wrapper');
+                const listID = listIContainer?.getAttribute('data-id');
+                if (listID)API.createCard(listID, this.elemTitle, '0');
+              }
+            } 
           }
           const elemsContainer = this.getClosestElem(plusElemContainer, `${this.elemsContainer}`);
           elemsContainer?.insertBefore(newElem, plusElemContainer);
@@ -115,7 +136,6 @@ export class ElementCreater {
 
   start() {
     this.createNewElem();
-
     const cardHandler = CardHandler.getInstance();
     cardHandler.cardEventListener();
   }
