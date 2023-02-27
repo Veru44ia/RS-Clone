@@ -33,12 +33,9 @@ export class BoardUI {
     <div class="list-container__wrapper" data-position="${position}" data-id="${id}">
       <div class="list-container__header">
         <h4 class="list-container__title">${title}</h4>
-        <svg class="list-container__settings" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M18 14C16.8954 14 16 13.1046 16 12C16 10.8954 16.8954 10 18 10C19.1046 10 20 10.8954 20 12C20 12.5304 19.7893 13.0391 19.4142 13.4142C19.0391 13.7893 18.5304 14 18 14ZM12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 12.5304 13.7893 13.0391 13.4142 13.4142C13.0391 13.7893 12.5304 14 12 14ZM6 14C4.89543 14 4 13.1046 4 12C4 10.8954 4.89543 10 6 10C7.10457 10 8 10.8954 8 12C8 12.5304 7.78929 13.0391 7.41421 13.4142C7.03914 13.7893 6.53043 14 6 14Z"
-            fill="#1D1D1D" />
-        </svg>
+        <svg class="delete-card-button" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5Z" fill="#1D1D1D"/>
+        </svg>               
       </div>
       <div class="list-container__cards-container">
         <div class="list-container__add-card-wrapper">
@@ -54,9 +51,9 @@ export class BoardUI {
   `;
   }
 
-  static addCard(title: string) {
+  static addCard(title: string, id: string) {
     return `
-    <div class="card-input-wrapper">
+    <div class="card-input-wrapper" data-id="${id}">
     <div class='card card-target'>
     <p class='card-target'>${title}</p>
     </div>
@@ -87,14 +84,6 @@ export class BoardUI {
     <div class="modal-container__wrapper">
       <div class="modal-container__header">
         <div class="modal-container__change-title">
-          <div class="modal-container__title-icon icon">
-            <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M13.3335 14H2.66683C1.93045 14 1.3335 13.403 1.3335 12.6667V3.33333C1.3335 2.59695 1.93045 2 2.66683 2H13.3335C14.0699 2 14.6668 2.59695 14.6668 3.33333V12.6667C14.6668 13.403 14.0699 14 13.3335 14ZM2.66683 4.66667V12.6667H13.3335V4.66667H2.66683Z"
-                fill="#1D1D1D" />
-            </svg>
-          </div>
-          <input class="title" type="text" value="Lorem Ipsum" class="modal-container__title-input">
         </div>
         <div class="modal-container__close-button">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,17 +94,7 @@ export class BoardUI {
         </div>
       </div>
       <div class="modal-container__content-wrapper">
-        <div class="modal-container__left-side"></div>
-        <div class="modal-container__right-side">
-        <div class="modal-container__semantic-container">
-            <h6>Добавить в карточку</h6>
-            <button class="modal-container__labels">Метки</button>
-          </div>
-          <div class="modal-container__semantic-container">
-            <h6>Действия</h6>
-            <button class="modal-container__remove-card">Удалить</button>
-          </div>
-        </div>
+            <button class="modal-container__remove-card">Удалить карточку</button>
       </div>
     </div>
   </div>

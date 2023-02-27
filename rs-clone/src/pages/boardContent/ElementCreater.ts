@@ -117,12 +117,16 @@ export class ElementCreater {
               }
             } 
           } else {
-            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(this.elemTitle)}`);
             if (targetContainer && this.board) {
               if (this.addButton) {
                 const listIContainer = this.addButton.closest('.list-container__wrapper');
                 const listID = listIContainer?.getAttribute('data-id');
-                if (listID)API.createCard(listID, this.elemTitle, '0');
+                if (listID) {
+                  const card = await API.createCard(listID, this.elemTitle, '0');
+                  if (card) {
+                    newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(this.elemTitle, card._id)}`);
+                  }
+                }
               }
             } 
           }

@@ -37,7 +37,7 @@ export class BoardSaveElemsRender {
             const cardsContainer = item.querySelector('.list-container__cards-container');
             const newElem: HTMLElement = document.createElement('div');
             newElem.classList.add('card-container');
-            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(cards[i].title)}`);
+            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(cards[i].title, cards[i]._id)}`);
             cardsContainer?.prepend(newElem);
           }
         }

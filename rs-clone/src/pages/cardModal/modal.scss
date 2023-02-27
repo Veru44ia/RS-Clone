@@ -46,9 +46,13 @@
     }
   }
 
+  .modal-container__remove-card {
+    width: 100%;
+  }
+
   .modal-container__wrapper {
     background-color: var(--WHITE);
-    width: 50vw;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -57,13 +61,14 @@
 
     .modal-container__change-title {
       display: flex;
+      align-items: center;
       gap: 8px;
 
       input {
         border: none;
         background-color: transparent;
         height: 24px;
-        width: auto;
+        width: 200px;
         color: var(--BLACK);
         font-size: 24px;
         font-weight: 600;

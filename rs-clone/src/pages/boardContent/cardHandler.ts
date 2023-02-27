@@ -1,3 +1,4 @@
+import { API } from '../../core/api/api';
 import { Modal } from '../cardModal/modal';
 import { BoardUI } from './ui';
 
@@ -15,7 +16,9 @@ export class CardHandler {
 
   targetContainer: HTMLElement | null = document.querySelector('.board-container__columns');
 
-  targetClass = 'card-target';
+  cardTargetClass = 'card-target';
+
+  setingsTargerClass = 'list-container__settings';
 
   target: HTMLElement | null = null;
 
@@ -24,14 +27,21 @@ export class CardHandler {
       this.eventListenerStatus = true;
       this.targetContainer?.addEventListener('click', (event) => {
         const target = event.target as HTMLElement;
-        if (target.classList.contains(`${this.targetClass}`)) {
+        if (target.classList.contains(`${this.cardTargetClass}`)) {
           this.renderModal();
           const modal = new Modal(target);
           modal.start();
+        } else if (target.classList.contains('delete-card-button')) {
+          const list = target.closest('.list-container');
+          const listWrapper = target.closest('.list-container__wrapper');
+          if (listWrapper) {
+            const listID = listWrapper.getAttribute('data-id');
+            if (listID) API.deleteList(listID);
+            if (list) list.remove();
+          }
         }
       });
     }
-
   }
 
   renderModal() {

@@ -31,34 +31,39 @@ export class AuthorizationHandler {
       if (this.passwordInput) {
         password = this.passwordInput.value;
       }
-    
-      fetch(`${this.backendUrl}/users/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Origin: 'http://127.0.0.1:5555',
-        },
-        body: JSON.stringify({
-          login: `${login}`,
-          password: `${password}`,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (this.responseMessage) this.responseMessage.innerHTML = data.message;
-          if (data.user) {
-            if (this.currentUserField) this.currentUserField.innerHTML = data.user.login;
-            this.currentUser = data.user;
-            
-            localStorage.setItem('userID', data.user._id);
-            localStorage.setItem('userLogin', data.user.login);
-            this.GoToMainPage();
-          }
+ 
+      if (password.length > 0 && login.length > 0) {
+        fetch(`${this.backendUrl}/users/create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Origin: 'http://127.0.0.1:5555',
+          },
+          body: JSON.stringify({
+            login: `${login}`,
+            password: `${password}`,
+          }),
         })
-        .catch((error) => {
-          if (this.responseMessage) this.responseMessage.innerHTML = error.message;
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            if (this.responseMessage) this.responseMessage.innerHTML = data.message;
+            if (data.user) {
+              if (this.currentUserField) this.currentUserField.innerHTML = data.user.login;
+              this.currentUser = data.user;
+            
+              localStorage.setItem('userID', data.user._id);
+              localStorage.setItem('userLogin', data.user.login);
+              this.GoToMainPage();
+            }
+          })
+          .catch((error) => {
+            if (this.responseMessage) this.responseMessage.innerHTML = error.message;
+          });
+      } else {
+        if (this.responseMessage) this.responseMessage.innerHTML = 'Введите email и пароль';
+      }
+    
     });
   }
 

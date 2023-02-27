@@ -1,3 +1,5 @@
+import { API } from '../../core/api/api';
+import { PageIDs } from '../../core/data/data';
 import { BoardSaveElemsRender } from './boardSaveElemsRender';
 import { BorderBasicElement } from './borderBasicElement';
 import { ElementCreater } from './ElementCreater';
@@ -58,11 +60,32 @@ export class BoardHandler {
     CardCreatorParams.PLACEHOLDER,
   );
 
+  removeBoard() {
+    const removeButton = document.querySelector('.option');
+    removeButton?.addEventListener('click', async () => {
+      const boardContainer = document.querySelector('.board-total-container');
+      const boardID = boardContainer?.getAttribute('data-board-id');
+      if (boardID) {
+        console.log(boardID);
+        await API.deleteBoard(boardID);
+        const hash = window.location.hash;
+        if (hash === `#${PageIDs.MAIN_PAGE}`) {
+          window.location.hash = '#';
+        } else {
+          window.location.hash = `#${PageIDs.MAIN_PAGE}`;
+        }
+      }
+
+    });
+
+  }
+
   start() {
     this.borderBasicElement.start();
     const boardSaveElemsRender = new BoardSaveElemsRender();
     boardSaveElemsRender.start();
     this.listCreater.start();
     this.CardCreater.start();
+    this.removeBoard();
   }
 }
