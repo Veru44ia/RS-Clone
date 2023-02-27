@@ -1,3 +1,4 @@
+import { API } from '../../core/api/api';
 import Aside from '../../core/components/aside/aside';
 import Modal from '../../core/components/createBoardModal/createBoardModal';
 import Page from '../../core/templates/page';
@@ -5,9 +6,9 @@ import LocalStorage from './localStorage';
 import './main.css';
 
 interface Board {
-  id: number,
-  name: string,
-  color: string,
+  _id: number,
+  title: string,
+  background: string,
 }
 
 class MainPage extends Page {
@@ -21,7 +22,18 @@ class MainPage extends Page {
     this.aside = new Aside();
   }
 
-  renderBoardsList(boards: Board[]) {
+  async getUserAllBoards() {
+    const allBoards = await API.getUserBoards();
+    return allBoards;
+  }
+
+  async renderBoardsList() {
+    let boards: Board[] = LocalStorage.getFromLocalStorage();
+    const userBoards = await this.getUserAllBoards();
+    if (userBoards) {
+      const allBoards = [...userBoards, ...boards];
+      boards = allBoards; 
+    }
     const mainWrapper = document.createElement('div');
     mainWrapper.classList.add('main-container');
     mainWrapper.append(this.aside.render());
@@ -29,16 +41,16 @@ class MainPage extends Page {
     boardsContainer.classList.add('boards-container');
     const boardsList = document.createElement('ul');
     boardsList.classList.add('boards-list');
-    boards.forEach(({ id, name, color }) => {
+    boards.forEach(({ _id, title, background }) => {
       const boardsItem = document.createElement('li');
       boardsItem.classList.add('boards-item');
       boardsItem.innerHTML = ` 
-        <button type="button" id="${id}" class="button">${name}</button>
+        <button type="button" id="${_id}" class="button">${title}</button>
       `;
-      if (color.startsWith('url')) {
-        (boardsItem.firstElementChild as HTMLElement).style.backgroundImage = `${color}`;
+      if (background.startsWith('url')) {
+        (boardsItem.firstElementChild as HTMLElement).style.backgroundImage = `${background}`;
       } else {
-        (boardsItem.firstElementChild as HTMLElement).style.background = `${color}`;
+        (boardsItem.firstElementChild as HTMLElement).style.background = `${background}`;
       }
       boardsList.append(boardsItem);
     });
@@ -49,7 +61,7 @@ class MainPage extends Page {
   }
 
   render() {
-    this.renderBoardsList(LocalStorage.getFromLocalStorage());
+    this.renderBoardsList();
     this.modal.openModal();
     return this.container;
   }

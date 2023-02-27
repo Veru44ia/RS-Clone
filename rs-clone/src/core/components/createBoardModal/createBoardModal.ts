@@ -18,8 +18,8 @@ class Modal {
         const buttonCreate = mainContainer[mainContainer.length - 1];
         buttonCreate.append(await this.render());
       });
-      const boardsContainer = document.body.querySelector('.boards-list') as HTMLElement;
-      boardsContainer.addEventListener('click', async (event: MouseEvent) => {
+      const boardsContainer = window.document.querySelector('.boards-list') as HTMLElement;
+      boardsContainer?.addEventListener('click', async (event: MouseEvent) => {
         if ((event.target as HTMLElement).textContent === 'Создать доску') {
           const mainContainer = document.body.querySelectorAll('.boards-item');
           const buttonCreate = mainContainer[mainContainer.length - 1];
@@ -98,35 +98,11 @@ class Modal {
       const modal = document.body.querySelector('.modal-container') as HTMLElement;
       const name = document.querySelector('.name') as HTMLInputElement;
       const color = document.querySelector('.tick') as HTMLInputElement;
-      const board = {
-        id: Date.now(),
-        name: `${name.value}`,
-        color: `${color.style.backgroundImage || color.style.backgroundColor}`,
-      };
-      if (localStorage.getItem('board')) {
-        const arr = JSON.parse(localStorage.getItem('board') as string);
-        const items = arr.slice(0, -1);
-        const lastItem = arr.slice(-1);
-        const newArr = [...items, board, ...lastItem];
-        localStorage.setItem('board', JSON.stringify(newArr));
-
-        const newBoard = await API.createBoard(board.name, board.color);
-        if (newBoard) {
-          console.log(newBoard);
-          const openBoard = new OpenBoard(newBoard._id, newBoard.title, newBoard.background);
-          openBoard.start();
-        } 
-
-        ////////////////////////////get all boards
-
-        const allBoards = await API.getUserBoards();
-        console.log(allBoards);
-
-        ////////////////////////////
-
-      } else {
-        localStorage.setItem('board', JSON.stringify(board));
-      }
+      const board = await API.createBoard(name.value, color.style.backgroundImage || color.style.backgroundColor);
+      if (board) {
+        const openBoard = new OpenBoard(board._id, board.title, board.background);
+        openBoard.start();
+      } 
       modal.remove();
     });
   }
