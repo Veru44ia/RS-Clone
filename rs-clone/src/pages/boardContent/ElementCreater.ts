@@ -110,7 +110,10 @@ export class ElementCreater {
               const boardID = this.board.getAttribute('data-board-id');
               if (boardID) {
                 const list = await API.createList(boardID, this.elemTitle, countOfLists.toString());
-                if (list) newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(list.title, list._id, list.position)}`);
+                if (list) {
+                  newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(list.title, list._id, list.position)}`);
+                  console.log(list._id);
+                } 
               }
             } 
           } else {
@@ -133,7 +136,6 @@ export class ElementCreater {
 
   start() {
     this.createNewElem();
-
     const cardHandler = CardHandler.getInstance();
     cardHandler.cardEventListener();
   }

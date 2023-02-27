@@ -58,11 +58,10 @@ export class BoardHandler {
     CardCreatorParams.PLACEHOLDER,
   );
 
-  boardSaveElemsRender = new BoardSaveElemsRender();
-
   start() {
     this.borderBasicElement.start();
-    this.boardSaveElemsRender.start();
+    const boardSaveElemsRender = new BoardSaveElemsRender();
+    boardSaveElemsRender.start();
     this.listCreater.start();
     this.CardCreater.start();
   }

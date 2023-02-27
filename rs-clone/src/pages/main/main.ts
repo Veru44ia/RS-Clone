@@ -2,6 +2,7 @@ import { API } from '../../core/api/api';
 import Aside from '../../core/components/aside/aside';
 import Modal from '../../core/components/createBoardModal/createBoardModal';
 import Page from '../../core/templates/page';
+import { OpenBoard } from '../board/openBoard';
 import LocalStorage from './localStorage';
 import './main.css';
 
@@ -31,17 +32,20 @@ class MainPage extends Page {
     const boardsList = document.body.querySelector('.boards-list') as HTMLElement;
     boardsList.addEventListener('click', (event: MouseEvent) => { 
       if ((event.target as HTMLElement).closest('.boards-item .button')) {
-        const id = (event.target as HTMLButtonElement).id;
-        const title = (event.target as HTMLButtonElement).textContent;
-        let background = (event.target as HTMLButtonElement).getAttribute('style') as string;
-        if (background.includes('image')) {
-          background = background.slice(18);
-        } else {
-          background = background.slice(12);
+        if ((event.target as HTMLElement).textContent !== 'Создать доску') {
+          const id = (event.target as HTMLButtonElement).id;
+          const title = (event.target as HTMLButtonElement).textContent;
+          let background = (event.target as HTMLButtonElement).getAttribute('style') as string;
+          if (background.includes('image')) {
+            background = background.slice(18);
+          } else {
+            background = background.slice(12);
+          }
+          if (title) {
+            const openBoard = new OpenBoard(id, title, background);
+            openBoard.start();
+          }
         }
-        console.log(id);
-        console.log(title);
-        console.log(background);
       } 
     });
   }

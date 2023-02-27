@@ -139,11 +139,12 @@ export class API {
   }
 
   static async getListCards(listID:string): Promise<ICrad[] | void> {
-    const result: ICrad[] | void = await fetch(`${this.backendUrl}/lists/${listID}`, {
+    const result: ICrad[] | void = await fetch(`${this.backendUrl}/cards/${listID}`, {
       method: 'GET',
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         return data;
       })
       .catch((error) => console.log(error.message));

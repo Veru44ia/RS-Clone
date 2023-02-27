@@ -8,22 +8,22 @@ export class BoardSaveElemsRender {
   columnsContainer = document.querySelector('.board-container__columns');
 
   async setLists() {
-    if (this.boardContainer) {
+    if (this.columnsContainer && this.boardContainer) {
       const boardID = this.boardContainer.getAttribute('data-board-id');
       if (boardID) {
         const boardLists = await API.getBoardLists(boardID);
         if (boardLists && boardLists.length > 0) {
-          for (let i = 0; i < boardLists.length; i++) {
+          for (let i = boardLists.length - 1; i >= 0; i--) {
             const newElem: HTMLElement = document.createElement('div');
             newElem.classList.add('list-container');
-            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(boardLists[i].title, boardLists[i].position)}`);
-            this.boardContainer.appendChild(newElem);
+            newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addList(boardLists[i].title, boardLists[i]._id,  boardLists[i].position)}`);
+            this.columnsContainer.prepend(newElem);
           }
-        } else {
-          console.log('no lists');
         }
       } 
     } 
+
+    this.setCards();
   }
 
   setCards() {
@@ -33,16 +33,13 @@ export class BoardSaveElemsRender {
       if (listID) {
         const cards = await API.getListCards(listID);
         if (cards && cards.length > 0) {
-          for (let i = 0; i < cards.length; i++) {
+          for (let i = cards.length - 1; i >= 0; i--) {
             const cardsContainer = item.querySelector('.list-container__cards-container');
-            const plusElemContainer = item.querySelector('.list-container__add-card-wrapper');
             const newElem: HTMLElement = document.createElement('div');
             newElem.classList.add('card-container');
             newElem.insertAdjacentHTML('afterbegin', `${BoardUI.addCard(cards[i].title)}`);
-            cardsContainer?.insertBefore(newElem, plusElemContainer);
+            cardsContainer?.prepend(newElem);
           }
-        } else {
-          console.log(`list ${listID} have no cards`);
         }
       }
     });
@@ -50,6 +47,5 @@ export class BoardSaveElemsRender {
 
   start() {
     this.setLists();
-    this.setCards();
   }
 }
