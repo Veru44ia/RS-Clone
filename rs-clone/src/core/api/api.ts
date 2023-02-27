@@ -11,6 +11,12 @@ export interface IList {
   position: string;
 }
 
+export interface ICrad {
+  _id: string;
+  title: string;
+  position: string;
+}
+
 export class API {
 
   static backendUrl = 'https://fullstackproject-production.up.railway.app';
@@ -51,19 +57,20 @@ export class API {
     return result;
   }
 
-  // static async deleteBoard(id) {
-  //   console.log(`id is: ${id}`);
-  //   await fetch(`${backendUrl}/boards/${id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {})
-  //     .catch((error) => console.log(error.message));
-  //   updateBoardsUI();
-  // }
+  static async deleteBoard(id: string) {
+    console.log(`id is: ${id}`);
+    await fetch(`${this.backendUrl}/boards/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error.message));
+  }
 
   static async createList(boardID: string, title: string, position: string) : Promise<IList | void> {
-    const createdBoard : IList | void = await fetch(`${API.backendUrl}/lists/create`, {
+    const createdList : IList | void = await fetch(`${API.backendUrl}/lists/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,7 +88,7 @@ export class API {
         return data;
       })
       .catch((error) => console.log(error.message));
-    return createdBoard;
+    return createdList;
   }
 
   static async getBoardLists(boardID:string): Promise<IList[] | void> {
@@ -94,6 +101,66 @@ export class API {
       })
       .catch((error) => console.log(error.message));
     return result;
+  }
+
+  static async deleteList(id: string) {
+    console.log(`id is: ${id}`);
+    await fetch(`${this.backendUrl}/lists/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error.message));
+  }
+
+  static async createCard(listID: string, title: string, position: string) : Promise<ICrad | void> {
+    const createdCard: ICrad | void = await fetch(`${API.backendUrl}/cards/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Origin: 'http://127.0.0.1:5555',
+      },
+      body: JSON.stringify({
+        title: `${title}`,
+        list: `${listID}`,
+        position: `${position}`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => console.log(error.message));
+    return createdCard;
+  }
+
+  static async getListCards(listID:string): Promise<ICrad[] | void> {
+    const result: ICrad[] | void = await fetch(`${this.backendUrl}/cards/${listID}`, {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => console.log(error.message));
+    return result;
+  }
+
+  static async deleteCard(id: string) {
+    console.log(`id is: ${id}`);
+    await fetch(`${this.backendUrl}/cards/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error.message));
   }
 
 }

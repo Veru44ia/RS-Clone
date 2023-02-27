@@ -19,7 +19,7 @@ export class OpenBoard {
       mainContainer.innerHTML = '';
       mainContainer.insertAdjacentHTML('afterbegin', `
       <div id="current-page">
-      <div class="board-total-container" data-boardI-id="${this.boardID}">
+      <div class="board-total-container" data-board-id="${this.boardID}">
         <div class="board-total-container__header">
           <div class="title">
             <h2>${this.title}</h2>
@@ -42,11 +42,11 @@ export class OpenBoard {
     </div>
       `);
 
-      const boardTotalContainer = document.querySelector('.board-total-container');
+      const boardTotalContainer = document.querySelector('.board-total-container') as HTMLElement;
       if (this.color.startsWith('url')) {
-        (boardTotalContainer as HTMLElement).style.backgroundImage = `${this.color}`;
+        boardTotalContainer.style.backgroundImage = `${this.color.slice(0, -1)}`;
       } else {
-        (boardTotalContainer as HTMLElement).style.background = `${this.color}`;
+        boardTotalContainer.style.background = `${this.color.slice(0, -1)}`;
       }
     }
   }
