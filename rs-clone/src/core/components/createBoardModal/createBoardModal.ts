@@ -11,22 +11,20 @@ class Modal {
   }
 
   openModal() {
-    window.onload = () => {
-      const headerButton = document.body.querySelector('.create-bord-button') as HTMLElement;
-      headerButton.addEventListener('click', async () => {
+    const headerButton = document.body.querySelector('.create-bord-button') as HTMLElement;
+    headerButton.addEventListener('click', async () => {
+      const mainContainer = document.body.querySelectorAll('.boards-item');
+      const buttonCreate = mainContainer[mainContainer.length - 1];
+      buttonCreate.append(await this.render());
+    });
+    const boardsContainer = window.document.querySelector('.boards-list') as HTMLElement;
+    boardsContainer?.addEventListener('click', async (event: MouseEvent) => {
+      if ((event.target as HTMLElement).textContent === 'Создать доску') {
         const mainContainer = document.body.querySelectorAll('.boards-item');
         const buttonCreate = mainContainer[mainContainer.length - 1];
         buttonCreate.append(await this.render());
-      });
-      const boardsContainer = window.document.querySelector('.boards-list') as HTMLElement;
-      boardsContainer?.addEventListener('click', async (event: MouseEvent) => {
-        if ((event.target as HTMLElement).textContent === 'Создать доску') {
-          const mainContainer = document.body.querySelectorAll('.boards-item');
-          const buttonCreate = mainContainer[mainContainer.length - 1];
-          buttonCreate.append(await this.render());
-        }
-      });
-    };
+      }
+    });
   }
 
   closeModal() {
@@ -74,7 +72,7 @@ class Modal {
   }
 
   async getLinkToImage() {
-    const url = 'https://api.unsplash.com/photos/random?query=nature&client_id=bgAy5fr13aewuw8euLW7ruqB3CB524TPyYwbGEoOql4';
+    const url = 'https://api.unsplash.com/photos/random?query=nature&client_id=agZpW_a7zy5X1aalj2Tr1ubXX9ZhaFpjSyRYTzvMnIg';
     const res = await fetch(url);
     const data = await res.json();
     return data.urls.regular;

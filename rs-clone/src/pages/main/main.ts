@@ -27,6 +27,25 @@ class MainPage extends Page {
     return allBoards;
   }
 
+  buttonsListeners() {
+    const boardsList = document.body.querySelector('.boards-list') as HTMLElement;
+    boardsList.addEventListener('click', (event: MouseEvent) => { 
+      if ((event.target as HTMLElement).closest('.boards-item .button')) {
+        const id = (event.target as HTMLButtonElement).id;
+        const title = (event.target as HTMLButtonElement).textContent;
+        let background = (event.target as HTMLButtonElement).getAttribute('style') as string;
+        if (background.includes('image')) {
+          background = background.slice(18);
+        } else {
+          background = background.slice(12);
+        }
+        console.log(id);
+        console.log(title);
+        console.log(background);
+      } 
+    });
+  }
+
   async renderBoardsList() {
     let boards: Board[] = LocalStorage.getFromLocalStorage();
     const userBoards = await this.getUserAllBoards();
@@ -57,12 +76,13 @@ class MainPage extends Page {
     boardsContainer.append(boardsList);
     mainWrapper.append(boardsContainer);
     (this.container as HTMLElement).append(mainWrapper);
+    this.modal.openModal();
+    this.buttonsListeners();
     return this.container;
   }
 
   render() {
     this.renderBoardsList();
-    this.modal.openModal();
     return this.container;
   }
 }
