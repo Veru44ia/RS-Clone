@@ -37,15 +37,17 @@ export class API {
     return createdBoard;
   }
 
-  static async getUserBoards(): Promise<IBoard[] | void> {
-    const result: IBoard[] | void = await fetch(`${this.backendUrl}/boards/${localStorage.getItem('userID')}`, {
+  static async getUserBoards() {
+    let result;
+    await fetch(`${this.backendUrl}/boards/${localStorage.getItem('userID')}`, {
       method: 'GET',
     })
       .then((response) => response.json())
       .then((data) => {
-        return data;
+        result = data;
       })
       .catch((error) => console.log(error.message));
+    console.log(result);
     return result;
   }
 
