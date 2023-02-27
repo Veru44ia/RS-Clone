@@ -1,3 +1,4 @@
+import { API } from '../../core/api/api';
 import { Modal } from '../cardModal/modal';
 import { BoardUI } from './ui';
 
@@ -30,23 +31,18 @@ export class CardHandler {
           this.renderModal();
           const modal = new Modal(target);
           modal.start();
+        } else if (target.classList.contains('delete-card-button')) {
+          const list = target.closest('.list-container');
+          const listWrapper = target.closest('.list-container__wrapper');
+          if (listWrapper) {
+            const listID = listWrapper.getAttribute('data-id');
+            if (listID) API.deleteList(listID);
+            if (list) list.remove();
+          }
         }
       });
     }
   }
-
-  // cardSettings() {
-  //   function getCoords(elem: HTMLElement) {
-  //     const box = elem.getBoundingClientRect();
-    
-  //     return {
-  //       top: box.top + window.pageYOffset,
-  //       right: box.right + window.pageXOffset,
-  //       bottom: box.bottom + window.pageYOffset,
-  //       left: box.left + window.pageXOffset,
-  //     };
-  //   }
-  // }
 
   renderModal() {
     document.body.insertAdjacentHTML('afterbegin', `${BoardUI.cardModal()}`);

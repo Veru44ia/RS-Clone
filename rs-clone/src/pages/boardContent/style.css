@@ -59,6 +59,10 @@ body {
   background-color: #E76F51;
 }
 
+.board-container__columns .delete-card-button {
+  cursor: pointer;
+}
+
 .board-container__columns input[type=text],
 .board-container__columns .card {
   border-radius: 10px;
