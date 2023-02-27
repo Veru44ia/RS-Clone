@@ -1,0 +1,127 @@
+.authorization-container {
+  height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.authorization-container #response_message {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  opacity: 0.5;
+}
+
+.authorization-container .authorization-container__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.authorization-container h1 {
+  margin-bottom: 32px;
+}
+
+.authorization-container :root {
+  --WHITE: #F5F5F5;
+  --BLACK: #1D1D1D;
+  --BLUE: #264653;
+  --GRAY: rgba(29, 29, 29, 0.5);
+  --SUPER_WIITE: #fff;
+}
+
+.authorization-container .authorization-container__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+.authorization-container .input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+}
+
+.authorization-container .input-container label {
+  font-size: 16px;
+}
+
+.authorization-container input {
+  border-radius: 10px;
+  border: 1px solid var(--BLACK);
+  background-color: transparent;
+  padding: 10px 13px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 30vw;
+}
+
+.authorization-container input:focus {
+  outline: 2px solid var(--BLUE);
+  outline-offset: -2px;
+}
+
+.authorization-container .buttons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.authorization-container button {
+  cursor: pointer;
+  border: none;
+  background-color: #E76F51;
+  color: var(--WHITE);
+  border-radius: 50px;
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  padding: 8px 16px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  width: 14.5vw;
+  font-size: 70%;
+}
+
+.authorization-container button:hover {
+  background-color: var(--BLACK);
+}
+
+.authorization-container .sing-in {
+  background-color: transparent;
+  border: 1px solid var(--BLACK);
+  color: var(--BLACK);
+}
+
+.authorization-container .sing-in:hover {
+  background-color: var(--BLACK);
+  color: var(--WHITE);
+}
+/*# sourceMappingURL=authorization.css.map */

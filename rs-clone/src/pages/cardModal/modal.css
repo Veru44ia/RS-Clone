@@ -1,0 +1,191 @@
+:root {
+  --WHITE: #F5F5F5;
+  --BLACK: #1D1D1D;
+  --BLUE: #264653;
+  --GRAY: rgba(29, 29, 29, 0.5);
+  --SUPER_WIITE: #fff;
+}
+
+.card-modal-container {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(29, 29, 29, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-modal-container svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-modal-container h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card-modal-container h6 {
+  opacity: 0.5;
+  font-weight: 200;
+}
+
+.card-modal-container button {
+  cursor: pointer;
+  background-color: var(--BLACK);
+  border-radius: 0;
+  padding: 6px 12px;
+  border-radius: 2px;
+  color: var(--WHITE);
+  border: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.card-modal-container button:hover {
+  background-color: #264653;
+}
+
+.card-modal-container .modal-container__remove-card {
+  width: 100%;
+}
+
+.card-modal-container .modal-container__wrapper {
+  background-color: var(--WHITE);
+  width: 25vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px;
+  gap: 24px;
+  border-radius: 10px;
+}
+
+.card-modal-container .modal-container__wrapper .modal-container__change-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+}
+
+.card-modal-container .modal-container__wrapper .modal-container__change-title input {
+  border: none;
+  background-color: transparent;
+  height: 24px;
+  width: 200px;
+  color: var(--BLACK);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.card-modal-container .modal-container__wrapper .modal-container__change-title input:focus {
+  outline: none;
+  caret-color: #E76F51;
+}
+
+.card-modal-container .modal-container__wrapper .modal-container__content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.card-modal-container .modal-container__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.card-modal-container .modal-container__close-button {
+  cursor: pointer;
+}
+
+.card-modal-container .modal-container__content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.card-modal-container .description-container__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-modal-container .modal-container__left-side {
+  padding-right: 24px;
+}
+
+.card-modal-container .modal-container__right-side {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 12px;
+}
+
+.card-modal-container .modal-container__semantic-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+}
+
+.card-modal-container .description-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 6px;
+}
+
+.card-modal-container .description-container button {
+  background-color: var(--GRAY);
+  border-radius: 50px;
+  opacity: 0.5;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: var(--WHITE);
+  border: none;
+}
+
+.card-modal-container .description-container button:hover {
+  opacity: 1;
+}
+/*# sourceMappingURL=modal.css.map */
