@@ -1,3 +1,4 @@
+import { API } from '../../core/api/api';
 import { CardModalDescription } from './cardModalDescription';
 import { CardModalTitle } from './cardModalTitle';
 
@@ -34,6 +35,11 @@ export class Modal {
   removeCard() {
     this.removeButton?.addEventListener('click', () => {
       const card = this.target.closest('.card-container');
+      const cardWrapper = this.target.closest('.card-input-wrapper');
+      if (cardWrapper) {
+        const cardListID = cardWrapper.getAttribute('data-id');
+        if (cardListID)API.deleteCard(cardListID);
+      }
       if (card) card.remove();
       this.modal?.remove();
     });
@@ -44,7 +50,7 @@ export class Modal {
   start() {
     this.closeModal();
     this.removeCard();
-    this.cardModalDescription.start();
+    // this.cardModalDescription.start();
     this.cardModalTitle.start();
   }
 
